@@ -1,12 +1,12 @@
-# _brain Operating System (AI Project Control Framework)
+# ai-nexus (AI Project Control Framework)
 
 ## Overview
 
-_brain is a structured AI project execution system designed to control how an AI assistant plans, generates, and builds software projects.
+ai-nexus is a structured AI-driven project execution system that controls how an AI assistant plans, designs, and builds software projects.
 
-It enforces a strict lifecycle that removes ambiguity, reduces repeated context loading, and ensures consistent execution across any type of project (web app, SaaS, API, automation tool, etc.).
+It enforces a strict, deterministic lifecycle that eliminates ambiguity, prevents assumption-based reasoning, and ensures consistent execution across any project type (web apps, SaaS platforms, APIs, automation systems, and more).
 
-The system is designed to be reusable and works as a universal project foundation.
+The system is designed as a reusable project foundation that turns any repository into a controlled AI execution environment.
 
 ---
 
@@ -14,20 +14,22 @@ The system is designed to be reusable and works as a universal project foundatio
 
 The AI must never rely on assumptions.
 
-All decisions, architecture, tasks, timelines, and execution steps must be derived from structured files inside _brain.
+All decisions, architecture, tasks, timelines, and execution steps must be derived strictly from structured files inside the `_brain` system.
+
+If information is missing, the AI must request it. It must never fill gaps with inference.
 
 ---
 
 ## System Lifecycle
 
-The system always follows four strict phases:
+The system operates through four mandatory phases:
 
 1. BOOTSTRAP MODE
 2. CONFIRMATION LOCK
 3. SYSTEM GENERATION
 4. EXECUTION MODE
 
-No phase may be skipped.
+No phase may be skipped or reordered.
 
 ---
 
@@ -35,37 +37,37 @@ No phase may be skipped.
 
 ### 1. Initialization
 
-Open your project in VS Code and ensure the _brain folder exists at the root.
+Open the project in VS Code and ensure the `_brain` directory exists at the root.
 
-Start the system by instructing the AI:
+Start the system with:
 
 Read claude.md only. Start bootstrap mode.
 
-This forces the AI to enter controlled initialization mode.
+This forces the AI into controlled initialization.
 
 ---
 
 ### 2. BOOTSTRAP MODE
 
-In this phase, the AI collects full project requirements.
+In this phase, the AI collects complete project requirements before any planning or generation begins.
 
-It must ask and record:
+It must gather:
 
 * Project type (app, website, system, API, automation tool)
-* Domain (example: ticketing system, CRM, SaaS)
+* Domain (e.g. ticketing system, CRM, SaaS platform)
 * Target users (end users, internal staff, admins, public users)
-* Full feature list
+* Full feature list (detailed and complete)
 * Feature priority (must-have, should-have, nice-to-have)
-* Workflow description (how the system is used step-by-step)
+* Workflow description (step-by-step user/system flow)
 * Engineering level (basic, mid-level, senior-level)
 * Performance scale (small, medium, enterprise)
 * Security level (low, standard, strict)
 * UI style (minimal, modern, corporate, dark, custom)
-* Design references (if any)
+* Design references (if available)
 * Tech stack constraints (frontend, backend, database)
-* Deployment preference
+* Deployment preferences
 
-No code or file generation is allowed during this phase.
+No code generation or file writing is allowed in this phase.
 
 ---
 
@@ -73,85 +75,91 @@ No code or file generation is allowed during this phase.
 
 After collecting all requirements, the AI must:
 
-* Summarize the full specification
+* Consolidate and summarize the full specification
 * Present it clearly to the user
-* Ask for explicit confirmation
+* Request explicit confirmation to proceed
 
-Valid confirmations:
+Valid confirmations only:
 
 * confirm
 * approved
 * proceed
 
-Until confirmation is received, no file writing or coding is allowed.
+Until confirmation is received:
+
+* No file writing
+* No architecture generation
+* No coding
 
 ---
 
 ### 4. SYSTEM GENERATION
 
-Once confirmed, the AI generates and writes all _brain files based on the specification.
+Once confirmed, the AI generates and writes all `_brain` files based strictly on the approved specification.
 
-This phase builds the entire project structure.
+This phase establishes the full project structure.
 
-Memory Layer:
+---
+
+## Memory Layer
 
 * memory/app_context.md
 * memory/system_architecture.md
 * memory/glossary.md
 
-Task System:
+## Task System
 
 * progress/progress.md
 * progress/backlog.md
 * tasks/task_rules.md
 * tasks/task_templates.md
 
-Decision System:
+## Decision System
 
 * decisions/decision_log.md
 * decisions/rejected_options.md
 
-Skills System:
+## Skills System
 
 * skills/skills.md
 * skills/resources.md
 
-Deployment System:
+## Deployment System
 
 * deployment/deployment.md
 * deployment/environments.md
 
-Timelines:
+## Timeline System
 
 * timelines/actual_timeline.md
 * timelines/reported_timeline.md
 
-Summaries:
+## Summaries
 
 * summaries/current_state.md
 * summaries/weekly_summary.md
 
-Interaction Layer:
+## Interaction Layer
 
 * interaction/response_rules.md
 * interaction/assumptions.md
 
-Governance:
+## Governance
 
 * governance/rules.md
 * governance/scope.md
 
-Security:
+## Security
 
 * security/secrets_policy.md
 * security/auth_boundaries.md
 
-Releases:
+## Releases
 
 * releases/changelog.md
 * releases/versioning.md
 
-Prompts:
+## Prompts
 
 * prompts/bootstrap_prompt.md
 * prompts/continue_prompt.md
@@ -174,14 +182,14 @@ Execution follows a strict loop:
 
 2. Select exactly one task
 
-3. Implement only that task
+3. Execute only that task
 
 4. Update:
 
    * progress.md
    * current_state.md
 
-5. Stop execution
+5. Stop
 
 No multi-tasking is allowed unless explicitly instructed.
 
@@ -190,22 +198,22 @@ No multi-tasking is allowed unless explicitly instructed.
 ## File Responsibilities
 
 claude.md
-Controls system behavior, rules, and state transitions.
+Defines system behavior, lifecycle rules, and state transitions.
 
 progress/progress.md
-Single source of truth for all tasks.
+Single source of truth for active tasks.
 
 summaries/current_state.md
-Compressed live state of the project.
+Live compressed snapshot of project status.
 
 memory/app_context.md
-Defines what the system is building and why.
+Defines what is being built and why.
 
 memory/system_architecture.md
-Defines technical architecture and system design.
+Defines technical design and system structure.
 
 decisions/*
-Stores all locked decisions and rejected alternatives.
+Stores architectural decisions and rejected alternatives.
 
 timelines/*
 Defines project scheduling:
@@ -219,11 +227,11 @@ Defines project scheduling:
 
 * Never assume missing information
 * Never skip system phases
-* Never read full repository at once
-* Never generate code before SYSTEM GENERATION is complete
+* Never read the full repository at once
+* Never generate code before SYSTEM GENERATION
 * Always execute one task at a time
-* Always update progress after every task
-* Always follow structured file system
+* Always update progress after each task
+* Always follow the structured file system
 
 ---
 
@@ -231,8 +239,8 @@ Defines project scheduling:
 
 For every project:
 
-1. Initialize _brain
-2. Start bootstrap via claude.md
+1. Initialize `_brain`
+2. Start bootstrap via `claude.md`
 3. Collect full requirements
 4. Confirm specification
 5. Generate full system structure
@@ -240,12 +248,14 @@ For every project:
 
 ---
 
-## Result
+## Outcome
 
-Using _brain creates a controlled AI development environment that:
+Using ai-nexus creates a controlled AI development environment that:
 
 * Maintains persistent project memory
-* Eliminates repeated explanations
+* Eliminates repeated context explanation
 * Reduces token usage
-* Enforces structured development
-* Enables scalable multi-project workflow
+* Enforces structured execution
+* Enables scalable development across any project type
+
+---
