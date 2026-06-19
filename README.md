@@ -259,3 +259,104 @@ Using ai-nexus creates a controlled AI development environment that:
 * Enables scalable development across any project type
 
 ---
+## _brain Folder Structure
+
+This is the core system architecture of ai-nexus. Each folder represents a strict responsibility layer in the AI execution system.
+
+```text
+_brain/
+│
+├── claude.md
+│   # Core control system (state machine + execution rules)
+│
+├── README.md
+│   # Documentation for how to use the ai-nexus system
+│
+├── memory/
+│   ├── app_context.md
+│   │   # Defines what the project is, goals, and overall purpose
+│   ├── glossary.md
+│   │   # Project-specific terms and definitions
+│   └── system_architecture.md
+│       # Technical architecture (frontend, backend, database, flow)
+│
+├── progress/
+│   ├── progress.md
+│   │   # Active task tracker (single source of truth for execution)
+│   └── backlog.md
+│       # Future tasks and enhancements not yet in scope
+│
+├── tasks/
+│   ├── task_rules.md
+│   │   # Rules for how tasks must be executed
+│   └── task_templates.md
+│       # Standard format for defining tasks
+│
+├── decisions/
+│   ├── decision_log.md
+│   │   # All final architectural and product decisions
+│   └── rejected_options.md
+│       # Alternatives that were evaluated and rejected
+│
+├── skills/
+│   ├── skills.md
+│   │   # Required technologies and skill mapping
+│   └── resources.md
+│       # External learning resources and documentation links
+│
+├── deployment/
+│   ├── deployment.md
+│   │   # Deployment strategy and process
+│   └── environments.md
+│       # Environment configuration (dev, staging, prod)
+│
+├── timelines/
+│   ├── actual_timeline.md
+│   │   # Optimized AI-generated development schedule
+│   └── reported_timeline.md
+│       # Human-safe / external-facing timeline
+│
+├── summaries/
+│   ├── current_state.md
+│   │   # Live compressed snapshot of project status
+│   └── weekly_summary.md
+│       # Weekly progress summaries
+│
+├── interaction/
+│   ├── response_rules.md
+│   │   # Rules for how AI should respond during execution
+│   └── assumptions.md
+│       # Allowed assumptions and boundaries
+│
+├── governance/
+│   ├── rules.md
+│   │   # Hard constraints and system-wide rules
+│   └── scope.md
+│       # Defines what is inside/outside project scope
+│
+├── security/
+│   ├── secrets_policy.md
+│   │   # Rules for handling secrets, keys, and sensitive data
+│   └── auth_boundaries.md
+│       # Authentication and access control rules
+│
+├── releases/
+│   ├── changelog.md
+│   │   # Version history and updates
+│   └── versioning.md
+│       # Versioning strategy (semantic versioning rules)
+│
+├── prompts/
+│   ├── bootstrap_prompt.md
+│   │   # Initial system activation prompt
+│   ├── continue_prompt.md
+│   │   # Resume execution prompt
+│   └── debug_prompt.md
+│       # Debugging and recovery prompt
+│
+└── templates/
+    ├── update_rules.md
+    │   # Rules for updating _brain files safely
+    └── repo_init_script.sh
+        # Script to initialize the repository structure automatically
+```
