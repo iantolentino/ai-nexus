@@ -1,26 +1,33 @@
 @echo off
+setlocal
+
 set REPO=https://github.com/iantolentino/ai-nexus.git
-set TARGET=ai-nexus
+set TARGET=_brain
 
-echo Cloning full repository...
-git clone %REPO% %TARGET%
-cd %TARGET%
+echo Removing old folder if it exists...
+rmdir /s /q "%TARGET%" 2>nul
 
-echo Cleaning up...
+echo Cloning repository into final folder name...
+git clone %REPO% "%TARGET%"
 
-:: Keep only _brain folder
+cd "%TARGET%"
+
+echo Cleaning everything except _brain folder...
+
 for /d %%D in (*) do (
     if /I not "%%D"=="_brain" rmdir /s /q "%%D"
 )
 
 for %%F in (*) do (
-    if /I not "%%F"=="README.md" if /I not "%%F"=="yourfile.bat" del /f /q "%%F"
+    if /I not "%%F"=="README.md" del /f /q "%%F"
 )
 
-:: Flatten _brain into root
-xcopy _brain\* . /E /I /H /Y >nul
-rmdir /s /q _brain
+echo Flattening _brain...
+xcopy "_brain\*" "." /E /I /H /Y >nul
+rmdir /s /q "_brain"
 
-echo Done. Only _brain content remains.
+cd ..
+
+echo Done. Final folder is already named: _brain
 
 exit
