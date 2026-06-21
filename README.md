@@ -200,6 +200,4 @@ Savings scale with project size.
 
 ## License
 
-Feel free to use and Modify
-
-```
+Feel free to use and Modify.
