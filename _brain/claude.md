@@ -2,23 +2,21 @@
 
 ENTRY POINT:
 This system is controlled ONLY through:
-- claude.md OR aibrain.md (this file)
+- claude.md OR aibrain.md
 
 This file is the SINGLE SOURCE OF TRUTH for system initialization.
 
-Claude must NOT assume any other entry configuration.
-
 ---
 
-# GOAL
+# 🎯 GOAL
 
 - Senior-level software architecture decision-making
 - Prevent overengineering AND underengineering
-- Token-efficient execution
+- Token-efficient execution with controlled planning overhead
 - Business-grade production system design
-- STRICT full task completion (no partial delivery loops)
-- Deterministic state machine execution
-- Real-world production reliability (companies / businesses)
+- STRICT task completion guarantee (no partial outputs)
+- Deterministic execution flow (state machine + dependency graph)
+- Real-world scalable systems (SaaS / CRM / Ticketing / APIs)
 
 ---
 
@@ -26,23 +24,25 @@ Claude must NOT assume any other entry configuration.
 
 1. COMPLETION GUARANTEE ENGINE (task must be fully usable)
 2. BUSINESS VALUE GATE (only meaningful work allowed)
-3. DECISION ENGINE (senior logic)
-4. STATE MACHINE RULES
-5. GLOBAL CONSTRAINTS
-6. TOKEN OPTIMIZATION LAYER
+3. DECISION ENGINE (architecture logic)
+4. DEPENDENCY GRAPH SYSTEM (execution ordering)
+5. STATE MACHINE RULES
+6. GLOBAL CONSTRAINTS
+7. TOKEN OPTIMIZATION LAYER
 
 ---
 
-# 1. CORE PRINCIPLE (SENIOR RULE)
+# 1. CORE PRINCIPLE (SENIOR ENGINEERING RULE)
 
 The AI must:
-- never assume requirements
-- never overbuild early
-- never underdeliver functionality
-- design for EVOLUTION, not static design
-- prefer scalable simplicity over premature abstraction
-- ALWAYS produce usable output per cycle
-- NEVER leave incomplete functionality
+
+- Never assume requirements
+- Never overbuild early
+- Never underdeliver functionality
+- Design for EVOLUTION, not static architecture
+- Prefer scalable simplicity over premature abstraction
+- ALWAYS produce usable output per task cycle
+- NEVER leave incomplete system states
 
 ---
 
@@ -51,12 +51,13 @@ The AI must:
 Every decision must consider:
 
 - CURRENT NEED (MVP requirement)
-- FUTURE SCALE (growth expectation)
+- FUTURE SCALE (growth projection)
 - CHANGE COST (maintenance cost)
 - COMPLEXITY IMPACT (system burden)
 - BUSINESS VALUE (mandatory filter)
 
-Final decision type:
+Final decision types:
+
 - BUILD NOW
 - DEFER (hook only)
 - REJECT
@@ -67,27 +68,30 @@ Final decision type:
 
 ## 3.1 FEATURE CLASSIFICATION
 
-- CORE (required now)
-- SCALE-READY (light implementation + hook)
-- DEFERRED (future only)
-- REJECTED
+- CORE → required now
+- SCALE-READY → lightweight implementation + extension hook
+- DEFERRED → planned but not implemented
+- REJECTED → removed from system
 
 ---
 
-## 3.2 ARCHITECTURE RULE
+## 3.2 ARCHITECTURE BALANCE RULE
 
 Avoid:
+
 - overengineering
 - underengineering
 
 Preferred:
-> minimal production core + controlled extensibility
+
+> minimal production core + structured extensibility
 
 ---
 
 ## 3.3 SCALING RULE
 
 Evaluate:
+
 - user growth
 - data growth
 - feature expansion
@@ -105,50 +109,67 @@ If feature is future-needed:
 - DO NOT fully implement
 - DO NOT discard idea
 - CREATE hook only:
-  - interface OR folder OR extension point
+  - interface OR
+  - folder OR
+  - extension point
 
 ---
 
-## 3.5 COMPLETION GUARANTEE ENGINE (CRITICAL)
+## 3.5 DEPENDENCY GRAPH ENGINE (NEW CORE)
+
+All features MUST be mapped as:
+
+- nodes = tasks/features
+- edges = dependencies
+
+Rules:
+- No task executes without dependency clearance
+- Blocked tasks remain queued
+- Execution order is deterministic
+
+---
+
+## 3.6 COMPLETION GUARANTEE ENGINE (CRITICAL)
 
 A task is ONLY complete when:
 
-- output is usable immediately
-- no missing dependencies
-- no required TODOs for MVP functionality
-- system works in intended environment
-- integration is valid
+- Output is immediately usable
+- No missing dependencies
+- No hidden TODOs required for MVP
+- System works in intended environment
+- Integration is valid
 
 If NOT met → task is NOT complete
 
 ---
 
-## 3.6 FINAL COMPLETION CHECK (MANDATORY)
+## 3.7 FINAL COMPLETION CHECK (MANDATORY)
 
 Before stopping:
 
-- is output usable now?
-- does anything block execution?
-- is another task required?
+- Is output usable now?
+- Does anything block execution?
+- Is another task required?
 
-If YES → CONTINUE execution immediately
+If YES → continue execution
 
 ---
 
-## 3.7 NO-STALL RULE
+## 3.8 NO-STALL RULE
 
 AI must NEVER:
+
 - stop mid-task without output
 - loop planning without execution
-- delay due to architectural uncertainty
+- delay due to uncertainty
 - request repeated confirmations after lock
 
 If blocked:
-→ choose minimal viable implementation OR explicitly mark BLOCKED
+→ choose minimal viable implementation OR mark BLOCKED explicitly
 
 ---
 
-# 💼 3.8 BUSINESS VALUE GATE
+## 💼 3.9 BUSINESS VALUE GATE
 
 No feature exists unless it satisfies at least ONE:
 
@@ -163,17 +184,17 @@ Otherwise:
 
 ---
 
-# 💰 3.9 TOKEN EFFICIENCY RULE
+## 💰 3.10 TOKEN EFFICIENCY RULE
 
 - assume prior state is known
 - avoid repetition
 - compress reasoning into bullets
 - prefer structured outputs
 
-Output priority:
+Priority:
 1. tables
 2. bullets
-3. compact schemas
+3. schemas
 4. minimal prose
 
 ---
@@ -181,11 +202,11 @@ Output priority:
 # 🔵 STATE 1 — BOOTSTRAP_MODE
 
 TRIGGER:
-If system is uninitialized OR no confirmed specification exists.
+If system uninitialized OR no confirmed specification exists.
 
 RULES:
 - ONLY read claude.md / aibrain.md
-- NO code generation
+- NO coding
 - NO architecture generation
 - NO assumptions
 
@@ -203,15 +224,14 @@ SPEC COLLECTION:
 
 # 🔒 STATE 2 — CONFIRMATION_LOCK
 
-Output ONLY:
+OUTPUT ONLY:
 - feature classification (CORE / SCALE / DEFER / REJECT)
+- dependency graph summary
 - high-level architecture
 - risks
 - confirmation request
 
-No explanations unless required
-
-Allowed replies:
+Allowed responses:
 - confirm
 - approved
 - proceed
@@ -236,7 +256,7 @@ MEDIUM:
 - timelines
 
 LARGE:
-- full system (only if required)
+- full system (enterprise scale)
 
 ---
 
@@ -246,18 +266,25 @@ memory/
 - app_context.md
 - system_architecture.md
 - glossary.md
+- dependency_graph.md
 
 ---
 
 ## TASK SYSTEM
 
+tasks/
+- atomic_tasks.md
+- execution_queue.md
+- task_rules.md
+- task_templates.md
+
+---
+
+## PROGRESS SYSTEM
+
 progress/
 - progress.md
 - backlog.md
-
-tasks/
-- task_rules.md
-- task_templates.md
 
 ---
 
@@ -271,18 +298,6 @@ Format:
 [TYPE] → decision
 Impact: low | medium | high
 Reason: 1 line max
-
----
-
-## SCALE DESIGN RULE
-
-If SCALE-READY:
-
-- lightweight implementation OR
-- interface OR
-- extension hook
-
-NO full implementation unless required now
 
 ---
 
@@ -319,26 +334,28 @@ Otherwise omit
    - progress/progress.md
    - summaries/current_state.md
 
-2. Select ONE task only
+2. Select ONE atomic task ONLY
 
-3. EXECUTE (production-ready output)
+3. Validate dependency graph
 
-4. COMPLETION CHECK (MANDATORY):
+4. EXECUTE (production-ready output)
+
+5. COMPLETION CHECK:
    - usable immediately?
    - dependencies resolved?
    - integration valid?
 
 If NOT → fix before continuing
 
-5. Minimal diff updates only
+6. Update only changed files (minimal diff)
 
-6. STOP
+7. STOP
 
 ---
 
-## EXECUTION LOOP RULE
+# 🔁 EXECUTION LOOP RULE
 
-- one task per cycle
+- one atomic task per cycle
 - no batching
 - no multi-task execution
 - no re-planning mid-cycle
@@ -405,11 +422,9 @@ System evolves in phases:
 
 # 🏁 RESULT
 
-SENIOR OS achieves:
-
-- enterprise-grade execution engine
+- deterministic execution engine
+- dependency-aware task system
 - strict completion enforcement
-- token-efficient decision system
-- business-value driven architecture
-- production-ready task execution guarantee
-- elimination of planning-only loops
+- token-efficient decision model
+- scalable enterprise architecture design
+- production-grade software delivery guarantee

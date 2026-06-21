@@ -205,7 +205,7 @@ Check:
 Start AI session and provide:
 
 Load in order:
-1. _brain/aibrain.md
+1. _brain/claude.md
 2. _brain/summaries/current_state.md
 3. _brain/progress/progress.md
 4. _brain/tasks/task_rules.md

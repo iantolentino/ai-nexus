@@ -1,203 +1,196 @@
 # AI Nexus — AI Project Control System
 
-AI Nexus is a **state-driven AI project control framework** designed to enforce deterministic behavior, prevent assumptions, and significantly reduce token consumption when using AI to build software projects.
+AI Nexus is a **state-driven control framework** for AI-assisted software development.
 
-This repository does **not** contain application code.  
-It contains the **control system that governs how an AI plans, structures, and executes a project**.
-
----
-
-## What This Repository Is
-
-AI Nexus is an **AI operating system**, not a prompt and not a chatbot configuration.
-
-It defines:
-- When the AI may read files
-- When the AI may write files
-- When the AI may plan architecture
-- When the AI may generate implementation code
-
-All behavior is enforced through a strict state machine defined in `_brain/aibrain.md`.
+It does not contain application code. It contains the **governance system that tells an AI how to plan, structure, and build a project** — enforcing deterministic behavior, preventing runaway token usage, and guaranteeing complete outputs.
 
 ---
 
-## Why AI Nexus Exists
+## Why This Exists
 
-Most AI-assisted projects fail due to:
-- Uncontrolled assumptions
-- Context bloat and runaway token usage
-- Mixing planning and execution
-- Inconsistent outputs across sessions
+Most AI-assisted projects break down because:
 
-AI Nexus solves this by enforcing **explicit states, hard rules, and controlled memory access**.
+- The AI makes assumptions about requirements
+- Planning and coding get mixed in the same session
+- Context bloat causes the AI to lose track of prior decisions
+- Outputs are partial, inconsistent, or unrepeatable
 
----
-
-## Core Design Principles
-
-- No assumptions, ever
-- Planning must precede execution
-- Memory is written deliberately, not inferred
-- Execution is single-task and stoppable
-- Context is minimized at all times
+AI Nexus fixes this with a strict **4-state execution model** and a memory system that keeps context minimal and controlled.
 
 ---
 
-## The Brain Controller (`_brain/aibrain.md`)
+## How It Works
 
-`aibrain.md` is the **single source of truth** for AI behavior.
+All AI behavior is governed by `_brain/claude.md` (the brain controller).
 
-It defines four immutable system states:
+The AI moves through four states in order. No state can be skipped.
 
-### 1. BOOTSTRAP_MODE
-- AI reads only `aibrain.md`
-- AI collects full project specification
-- No other files are read
-- No files are written
-- No architecture or code is generated
-
-### 2. CONFIRMATION_LOCK
-- AI summarizes the full specification
-- AI waits for explicit approval
-- No assumptions
-- No file writes
-- No code generation
-
-### 3. SYSTEM_GENERATION
-- AI writes the complete `_brain/` structure
-- Architecture, tasks, timelines, governance
-- Planning only
-- No implementation code allowed
-
-### 4. EXECUTION_MODE
-- AI reads only:
-  - `progress/progress.md`
-  - `summaries/current_state.md`
-- AI selects exactly one task
-- AI executes the task
-- AI updates memory
-- AI stops
-
-No state may be skipped.
+| State | Name | What Happens |
+|---|---|---|
+| 1 | BOOTSTRAP_MODE | AI collects project specs. No files written. No code. |
+| 2 | CONFIRMATION_LOCK | AI presents plan. Waits for your approval. |
+| 3 | SYSTEM_GENERATION | AI writes the full `_brain/` structure. No code yet. |
+| 4 | EXECUTION_MODE | AI executes one task at a time. Updates memory. Stops. |
 
 ---
 
-## Repository Structure
+## Quick Start
 
-```text
+### Step 1 — Add AI Nexus to your project
+
+Open a terminal in your project's root folder and run:
+
+```bat
+setup.bat
+```
+
+This downloads and installs the `_brain/` system into your project automatically.
+
+> **What setup.bat does:**
+> 1. Deletes any existing `_brain/` folder in your project
+> 2. Clones the AI Nexus repository from GitHub into a temporary `_brain/` folder
+> 3. Extracts only the `_brain/` contents from the clone (discards everything else)
+> 4. Flattens them into your project's `_brain/` folder
+> 5. Cleans up and confirms completion
+>
+> After it runs, your project will have a `_brain/` folder with the full AI Nexus system ready to use.
+
+---
+
+### Step 2 — Start a new project with AI
+
+Open a new AI chat session (Claude, ChatGPT, or any LLM).
+
+Copy and paste the contents of `_brain/prompts/bootstrap_prompt.md` into the chat.
+
+The AI will enter BOOTSTRAP_MODE and ask you 8 questions about your project. Answer them.
+
+---
+
+### Step 3 — Review and approve the plan
+
+After you answer the questions, the AI moves to CONFIRMATION_LOCK.
+
+It will present:
+- A feature classification (what to build now, defer, or reject)
+- A dependency map
+- A high-level architecture
+
+Reply with **confirm**, **approved**, or **proceed** to continue.
+
+The AI will then generate the full `_brain/` planning structure for your project (SYSTEM_GENERATION).
+
+---
+
+### Step 4 — Build, one task at a time
+
+For every new session where you want to continue building:
+
+Copy and paste the contents of `_brain/prompts/continue_prompt.md` into a new chat.
+
+The AI will:
+1. Read `_brain/progress/progress.md` and `_brain/summaries/current_state.md`
+2. Select the next incomplete task
+3. Execute it fully
+4. Update the memory files
+5. Stop
+
+Repeat this for each session.
+
+---
+
+### Debugging
+
+If something breaks, copy and paste the contents of `_brain/prompts/debug_prompt.md` into a chat, then describe the problem.
+
+The AI will fix only what is broken — no refactoring, no feature additions.
+
+---
+
+## Folder Structure
+
+```
 _brain/
-├── aibrain.md               # AI controller and state machine
-├── memory/                  # Project definition and architecture
-├── progress/                # Task list and execution status
-├── tasks/                   # Task rules and templates
-├── decisions/               # Accepted and rejected decisions
-├── skills/                  # Stack and learning resources
-├── deployment/              # Deployment strategy
-├── timelines/               # Actual vs reported timelines
-├── summaries/               # State snapshots
-├── interaction/             # Response and assumption rules
-├── governance/              # Scope and authority rules
-├── security/                # Auth and secret handling
-├── releases/                # Versioning and changelog
-└── prompts/                 # Reusable AI prompts
-````
+├── claude.md               ← Brain controller (DO NOT MODIFY)
+├── prompts/                ← Paste these into your AI sessions
+│   ├── bootstrap_prompt.md ← Start a new project
+│   ├── continue_prompt.md  ← Resume work
+│   └── debug_prompt.md     ← Fix something broken
+├── memory/                 ← Project context and architecture
+│   ├── app_context.md
+│   ├── system_architecture.md
+│   └── glossary.md
+├── progress/               ← Task tracking
+│   ├── progress.md         ← AI reads this every session
+│   └── backlog.md
+├── tasks/                  ← Task rules and templates
+│   ├── task_rules.md
+│   └── task_templates.md
+├── decisions/              ← Architecture and scope decisions
+│   ├── decision_log.md
+│   └── rejected_options.md
+├── timelines/              ← Technical and business timelines
+│   ├── actual_timeline.md
+│   └── reported_timeline.md
+├── summaries/              ← State snapshots
+│   ├── current_state.md    ← AI reads this every session
+│   └── weekly_summary.md
+├── interaction/            ← AI response rules
+│   ├── assumptions.md
+│   └── response_rules.md
+├── governance/             ← Scope and authority rules
+│   ├── rules.md
+│   └── scope.md
+├── security/               ← Auth and secrets policy
+│   ├── auth_boundaries.md
+│   └── secrets_policy.md
+├── deployment/             ← Deployment plan and environments
+│   ├── deployment.md
+│   └── environments.md
+├── releases/               ← Versioning and changelog
+│   ├── changelog.md
+│   └── versioning.md
+├── skills/                 ← Tech stack and references
+│   ├── skills.md
+│   └── resources.md
+└── guides/
+    └── new_machine_setup.md ← Onboarding a new machine or developer
+```
 
 ---
 
-## Token Efficiency and Measured Impact
+## Token Efficiency
 
-AI Nexus is designed to **cap context growth** and prevent exponential token usage.
+AI Nexus is designed to keep context small and predictable.
 
-### Typical Uncontrolled AI Workflow
-
-* Full repo scan per session
-* Repeated architecture re-ingestion
-* Multi-task execution in one response
-* Context window exhaustion
-
-**Estimated usage over a medium project**:
-
-* 200k–250k tokens per extended session
-* Frequent context resets
-* Loss of continuity
+| Metric | Uncontrolled AI | With AI Nexus |
+|---|---|---|
+| Files read per session | All (full repo scan) | 2–3 files max |
+| Tasks per session | Multiple (unbounded) | Exactly one |
+| Token usage (medium project) | ~250,000 | ~90,000 |
+| Reduction | — | ~55–65% |
 
 ---
 
-### AI Nexus Controlled Workflow
+## Rules
 
-* Single-file access in early states
-* State-gated file loading
-* Minimal read set during execution
-* One task per execution loop
-
-**Observed and modeled usage**:
-
-* Initial planning phase: ~20k–30k tokens
-* System generation phase: ~30k–40k tokens
-* Ongoing execution sessions: ~2k–5k tokens per task
-
-**Equivalent project total**:
-
-* ~80k–100k tokens for the same scope
-
----
-
-### Estimated Efficiency Gains
-
-* Token reduction: **55%–65%**
-* Context stability: **high**
-* Rework reduction: **significant**
-* Session predictability: **deterministic**
-
-Example comparison:
-
-* Uncontrolled approach: ~250,000 tokens
-* AI Nexus approach: ~90,000 tokens
-
-Savings scale with project size.
-
----
-
-## How This Achieves Efficiency
-
-* Files are never all loaded at once
-* Planning and execution are isolated
-* Memory is explicit and minimal
-* Execution context is intentionally small
-* AI is forbidden from scanning the repository
-
----
-
-## How to Use This Repository
-
-1. Clone the repository
-2. Start a new AI session
-3. Provide the contents of `_brain/aibrain.md` # initially it is set as claude.md
-4. Allow the AI to enter BOOTSTRAP_MODE
-5. Answer specification questions
-6. Approve the confirmation summary
-7. Allow SYSTEM_GENERATION to complete
-8. Execute tasks one at a time in EXECUTION_MODE
+- `claude.md` is the only file that controls AI behavior — never modify it during a project
+- All other `_brain/` files are data — the AI reads and writes them, you can read them anytime
+- Never skip a state
+- Never ask the AI to execute multiple tasks in one session
+- If something is unclear, consult `interaction/assumptions.md` — the AI is required to ask rather than guess
 
 ---
 
 ## Who This Is For
 
-* Developers building serious AI-assisted projects
-* Teams hitting token limits
-* Long-running or multi-phase builds
-* Anyone needing predictable AI behavior
-
----
-
-## What This Is Not
-
-* Not a chatbot prompt
-* Not an autonomous agent
-* Not a codebase generator without oversight
+- Developers building serious AI-assisted projects
+- Anyone hitting token limits or losing context across sessions
+- Teams who need predictable, repeatable AI outputs
+- Long-running or multi-phase builds where consistency matters
 
 ---
 
 ## License
 
-Feel free to use and Modify.
+Free to use and modify.
