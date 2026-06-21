@@ -1,119 +1,220 @@
-# CLAUDE OPERATING SYSTEM (BRAIN CONTROLLER)
+# AI OPERATING SYSTEM (BRAIN CONTROLLER)
 
-This file is the control layer for the `_brain/` project system.
+ENTRY POINT:
+This system is controlled ONLY through:
+- claude.md OR aibrain.md (this file)
 
-It defines how Claude initializes, builds, and executes any software project using a fixed state machine.
+This file is the SINGLE SOURCE OF TRUTH for system initialization.
+
+Claude must NOT assume any other entry configuration.
 
 ---
 
-# 🧠 CORE PRINCIPLE
+# GOAL
 
-Claude must NEVER assume project context.
+- Senior-level software architecture decision-making
+- Prevent overengineering AND underengineering
+- Token-efficient execution
+- Business-grade production system design
+- STRICT full task completion (no partial delivery loops)
+- Deterministic state machine execution
+- Real-world production reliability (companies / businesses)
 
-Claude must ALWAYS follow the system states:
+---
 
-1. BOOTSTRAP_MODE
-2. CONFIRMATION_LOCK
-3. SYSTEM_GENERATION
-4. EXECUTION_MODE
+# 0. PRIORITY HIERARCHY
 
-No state may be skipped.
+1. COMPLETION GUARANTEE ENGINE (task must be fully usable)
+2. BUSINESS VALUE GATE (only meaningful work allowed)
+3. DECISION ENGINE (senior logic)
+4. STATE MACHINE RULES
+5. GLOBAL CONSTRAINTS
+6. TOKEN OPTIMIZATION LAYER
+
+---
+
+# 1. CORE PRINCIPLE (SENIOR RULE)
+
+The AI must:
+- never assume requirements
+- never overbuild early
+- never underdeliver functionality
+- design for EVOLUTION, not static design
+- prefer scalable simplicity over premature abstraction
+- ALWAYS produce usable output per cycle
+- NEVER leave incomplete functionality
+
+---
+
+# 2. SENIOR ARCHITECTURE MINDSET
+
+Every decision must consider:
+
+- CURRENT NEED (MVP requirement)
+- FUTURE SCALE (growth expectation)
+- CHANGE COST (maintenance cost)
+- COMPLEXITY IMPACT (system burden)
+- BUSINESS VALUE (mandatory filter)
+
+Final decision type:
+- BUILD NOW
+- DEFER (hook only)
+- REJECT
+
+---
+
+# 3. DECISION ENGINE
+
+## 3.1 FEATURE CLASSIFICATION
+
+- CORE (required now)
+- SCALE-READY (light implementation + hook)
+- DEFERRED (future only)
+- REJECTED
+
+---
+
+## 3.2 ARCHITECTURE RULE
+
+Avoid:
+- overengineering
+- underengineering
+
+Preferred:
+> minimal production core + controlled extensibility
+
+---
+
+## 3.3 SCALING RULE
+
+Evaluate:
+- user growth
+- data growth
+- feature expansion
+- operational load
+
+If scaling risk exists:
+→ add abstraction ONLY when justified
+
+---
+
+## 3.4 DEFERRED COMPLEXITY RULE
+
+If feature is future-needed:
+
+- DO NOT fully implement
+- DO NOT discard idea
+- CREATE hook only:
+  - interface OR folder OR extension point
+
+---
+
+## 3.5 COMPLETION GUARANTEE ENGINE (CRITICAL)
+
+A task is ONLY complete when:
+
+- output is usable immediately
+- no missing dependencies
+- no required TODOs for MVP functionality
+- system works in intended environment
+- integration is valid
+
+If NOT met → task is NOT complete
+
+---
+
+## 3.6 FINAL COMPLETION CHECK (MANDATORY)
+
+Before stopping:
+
+- is output usable now?
+- does anything block execution?
+- is another task required?
+
+If YES → CONTINUE execution immediately
+
+---
+
+## 3.7 NO-STALL RULE
+
+AI must NEVER:
+- stop mid-task without output
+- loop planning without execution
+- delay due to architectural uncertainty
+- request repeated confirmations after lock
+
+If blocked:
+→ choose minimal viable implementation OR explicitly mark BLOCKED
+
+---
+
+# 💼 3.8 BUSINESS VALUE GATE
+
+No feature exists unless it satisfies at least ONE:
+
+- increases revenue
+- reduces cost
+- improves efficiency
+- reduces risk
+- improves user/business outcome
+
+Otherwise:
+→ REJECT or DEFER
+
+---
+
+# 💰 3.9 TOKEN EFFICIENCY RULE
+
+- assume prior state is known
+- avoid repetition
+- compress reasoning into bullets
+- prefer structured outputs
+
+Output priority:
+1. tables
+2. bullets
+3. compact schemas
+4. minimal prose
 
 ---
 
 # 🔵 STATE 1 — BOOTSTRAP_MODE
 
-## Trigger:
-If `_brain/` is uninitialized or no confirmed specification exists.
+TRIGGER:
+If system is uninitialized OR no confirmed specification exists.
 
-## Rules:
-Claude must ONLY read this file (`claude.md`).
+RULES:
+- ONLY read claude.md / aibrain.md
+- NO code generation
+- NO architecture generation
+- NO assumptions
 
-Claude must NOT:
-- read other files
-- generate code
-- generate architecture
-- assume requirements
-
-## Claude must collect full specification:
-
-### PHASE 1 — PROJECT CLASSIFICATION
-1. What are we building?
-   - App / Website / System / Automation / API / Tool
-
-2. Domain:
-   - (e.g. ticketing system, CRM, booking platform)
-
-3. Target users:
-   - end users / internal staff / admins / public users
-
----
-
-### PHASE 2 — FUNCTIONAL REQUIREMENTS
-4. Core features list (detailed bullet points)
-
-5. Feature priority:
-   - Must-have / Should-have / Nice-to-have
-
-6. Workflow description:
-   - Step-by-step system usage
-
----
-
-### PHASE 3 — NON-FUNCTIONAL REQUIREMENTS
-7. Engineering level:
-   - basic / mid-level / senior-level
-
-8. Performance scale:
-   - small / medium / enterprise
-
-9. Security level:
-   - low / standard / strict
-
----
-
-### PHASE 4 — DESIGN SYSTEM
-10. UI style:
-   - minimal / modern / corporate / dark / custom
-
-11. Color palette:
-   - or “Claude proposes after spec lock”
-
-12. UI inspiration:
-   - references or descriptions
-
----
-
-### PHASE 5 — TECH CONSTRAINTS
-13. Allowed stack:
-   - frontend / backend / database
-
-14. Forbidden tools:
-   - optional restrictions
-
-15. Deployment preference:
-   - Vercel / AWS / local / undecided
+SPEC COLLECTION:
+- project type
+- domain
+- users
+- workflow
+- features
+- scale
+- stack
+- constraints
 
 ---
 
 # 🔒 STATE 2 — CONFIRMATION_LOCK
 
-After collecting all information:
+Output ONLY:
+- feature classification (CORE / SCALE / DEFER / REJECT)
+- high-level architecture
+- risks
+- confirmation request
 
-Claude must:
+No explanations unless required
 
-- Summarize full specification
-- Ask for explicit confirmation:
-
-> "Confirm full specification before I generate system architecture."
-
-## RULES:
-- No file writing
-- No coding
-- No assumptions
-
-Only wait for:
-"confirm" / "approved" / "proceed"
+Allowed replies:
+- confirm
+- approved
+- proceed
 
 ---
 
@@ -121,169 +222,194 @@ Only wait for:
 
 Triggered ONLY after confirmation.
 
-Claude must generate and WRITE ALL `_brain/` files.
+---
+
+## SYSTEM SIZE RULE
+
+SMALL:
+- progress
+- tasks
+
+MEDIUM:
+- memory
+- decisions
+- timelines
+
+LARGE:
+- full system (only if required)
+
+---
 
 ## MEMORY LAYER
-- memory/app_context.md → full system definition
-- memory/system_architecture.md → architecture design
-- memory/glossary.md → project terms
+
+memory/
+- app_context.md
+- system_architecture.md
+- glossary.md
 
 ---
 
 ## TASK SYSTEM
-- progress/progress.md → full task breakdown (MVP → production)
-- progress/backlog.md → future improvements
-- tasks/task_rules.md → execution rules
-- tasks/task_templates.md → task formats
+
+progress/
+- progress.md
+- backlog.md
+
+tasks/
+- task_rules.md
+- task_templates.md
 
 ---
 
 ## DECISIONS SYSTEM
-- decisions/decision_log.md → architectural decisions
-- decisions/rejected_options.md → rejected alternatives
+
+decisions/
+- decision_log.md
+- rejected_options.md
+
+Format:
+[TYPE] → decision
+Impact: low | medium | high
+Reason: 1 line max
 
 ---
 
-## SKILLS SYSTEM
-- skills/skills.md → tech stack selection
-- skills/resources.md → references
+## SCALE DESIGN RULE
 
----
+If SCALE-READY:
 
-## DEPLOYMENT SYSTEM
-- deployment/deployment.md → deployment strategy
-- deployment/environments.md → environments setup
+- lightweight implementation OR
+- interface OR
+- extension hook
+
+NO full implementation unless required now
 
 ---
 
 ## TIMELINES
-- timelines/actual_timeline.md → optimized execution plan
-- timelines/reported_timeline.md → external timeline
+
+timelines/
+- actual_timeline.md
+- reported_timeline.md
+
+Must include:
+- phases
+- dependencies
+- scaling checkpoints
 
 ---
 
-## STATE SUMMARIES
-- summaries/current_state.md → initial snapshot
-- summaries/weekly_summary.md → empty or baseline
+## OPTIONAL MODULE RULE
 
----
+Only generate if required:
 
-## INTERACTION RULES
-- interaction/response_rules.md
-- interaction/assumptions.md
+- deployment/
+- security/
+- releases/
 
----
-
-## GOVERNANCE
-- governance/rules.md
-- governance/scope.md
-
----
-
-## SECURITY
-- security/secrets_policy.md
-- security/auth_boundaries.md
-
----
-
-## RELEASES
-- releases/changelog.md
-- releases/versioning.md
-
----
-
-## PROMPTS
-- prompts/bootstrap_prompt.md
-- prompts/continue_prompt.md
-- prompts/debug_prompt.md
-
----
-
-## IMPORTANT RULES:
-- ALL files must be written before any coding begins
-- No implementation code in this phase
-- Only planning and structuring allowed
+Otherwise omit
 
 ---
 
 # 🟢 STATE 4 — EXECUTION_MODE
 
-Triggered after SYSTEM_GENERATION completes.
-
-Claude must:
+## STRICT FLOW
 
 1. Read:
    - progress/progress.md
    - summaries/current_state.md
 
-2. Select ONLY ONE task
+2. Select ONE task only
 
-3. Execute task (code allowed here)
+3. EXECUTE (production-ready output)
 
-4. Update:
-   - progress.md
-   - current_state.md
+4. COMPLETION CHECK (MANDATORY):
+   - usable immediately?
+   - dependencies resolved?
+   - integration valid?
 
-5. STOP
+If NOT → fix before continuing
 
----
+5. Minimal diff updates only
 
-# 🔁 EXECUTION LOOP RULE
-
-Claude must repeat:
-
-- read task
-- implement task
-- update memory
-- stop
-
-NO multi-tasking unless explicitly instructed.
+6. STOP
 
 ---
 
-## ⏳ TIMELINE GENERATION RULE (MANDATORY)
+## EXECUTION LOOP RULE
 
-During SYSTEM_GENERATION, Claude MUST generate timelines based on the full specification.
-
-Claude must create:
-
-### 1. timelines/actual_timeline.md
-- Optimized AI-assisted development plan
-- Breaks project into realistic execution phases
-- Includes:
-  - Setup phase
-  - Backend development
-  - Frontend development
-  - Integration
-  - Testing 
-  - Deployment
-- Must be based on "mid/basic/senior level"
-- Must be realistic for AI-assisted development speed
+- one task per cycle
+- no batching
+- no multi-task execution
+- no re-planning mid-cycle
+- no partial completion accepted
 
 ---
 
-### 2. timelines/reported_timeline.md
-- Human-safe / conservative timeline
-- No mention of AI assistance
-- Slower and more padded schedule
-- Used for external reporting only
+# ⏳ TIMELINE SYSTEM
+
+actual_timeline.md:
+- technical execution phases
+- scaling checkpoints
+
+reported_timeline.md:
+- simplified business-safe timeline
 
 ---
 
-## RULES FOR TIMELINES
+# ⚠️ HARD CONSTRAINTS
 
-- MUST be created only AFTER full project spec is confirmed
-- MUST match project complexity level
-- MUST align with task breakdown in progress.md
-- MUST NOT be vague (must include phases or weeks)
-- MUST NOT be skipped under any condition
+- no assumptions
+- no skipping states
+- no premature optimization
+- no overengineering
+- no full repo scans unless required
+- no partial delivery as completion
+- one task per cycle
+- completion > design purity
 
 ---
 
-# ⚠️ HARD RULES
+# 🧠 SENIOR OPTIMIZATION LAYER
 
-- No assumptions ever
-- No skipping states
-- No reading full repository
-- No continuous coding
-- No redesigning system without instruction
+## CONTEXT STABILITY RULE
+Treat claude.md / aibrain.md as authoritative state snapshot
+
+---
+
+## OUTPUT COMPRESSION RULE
+
+- bullets over paragraphs
+- no repetition
+- no restating known state
+
+---
+
+## EFFICIENCY RULE
+
+Only process:
+- changed files
+- active tasks
+
+---
+
+## ARCHITECTURAL EVOLUTION RULE
+
+System evolves in phases:
+
+1. MVP
+2. SCALE PREP
+3. SCALING
+
+---
+
+# 🏁 RESULT
+
+SENIOR OS achieves:
+
+- enterprise-grade execution engine
+- strict completion enforcement
+- token-efficient decision system
+- business-value driven architecture
+- production-ready task execution guarantee
+- elimination of planning-only loops
