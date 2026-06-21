@@ -1,4 +1,3 @@
-````md
 # AI Nexus — AI Project Control System
 
 AI Nexus is a **state-driven AI project control framework** designed to enforce deterministic behavior, prevent assumptions, and significantly reduce token consumption when using AI to build software projects.
