@@ -236,11 +236,75 @@ AI Nexus is designed to keep context small and predictable.
 ## Global Brain (Optional)
 
 Each project's `_brain/` is scoped to that one project — a new project always starts blank. If
-you want preferences and recurring patterns to carry over between your projects too, create a
-separate personal repo (see [idt-global-brain](https://github.com/iantolentino/idt-global-brain)
-for a working example — don't clone it, it's tuned to one person; copy its shape instead) and
-point `_brain/memory/global_brain_link.md` at your local clone of it. Local project files always
-win over the global repo on conflict.
+you want preferences and recurring patterns to carry over between your projects too, build a
+second, separate repo for that. It's small — three files.
+
+### 1. Create it
+
+```bash
+# Create an empty repo on GitHub (private recommended, it'll hold personal preferences),
+# then clone it anywhere outside your other projects:
+git clone https://github.com/<you>/<your-global-brain>.git
+```
+
+### 2. Give it this shape
+
+```
+your-global-brain/
+├── GLOBAL.md              ← entry point: what this repo is, read order, authority rule
+├── preferences.md          ← things true across every project you build
+└── patterns/
+    └── pattern_log.md      ← bugs/decisions that recurred in 2+ projects
+```
+
+**`GLOBAL.md`** — tells the AI how and when to read the rest of this repo:
+
+```markdown
+# GLOBAL BRAIN — ENTRY POINT
+Read GLOBAL.md + preferences.md once per session, right after the project's own claude.md.
+Local project files always win over anything here on conflict.
+Only open patterns/pattern_log.md when doing a bug fix or architecture decision.
+```
+
+**`preferences.md`** — example entry:
+
+```markdown
+## Verify before claiming done
+Run the actual thing before reporting success — don't assert it works from reading the code.
+**Why:** caught two real bugs in installer scripts that looked correct on read.
+```
+
+**`patterns/pattern_log.md`** — example entry:
+
+```markdown
+| ID   | Pattern                                              | Category   | Seen In               | Fix                                             | Date       |
+|------|-------------------------------------------------------|------------|------------------------|--------------------------------------------------|------------|
+| G001 | Relative paths break when script run from another cwd | AUTOMATION | project-a, project-b  | Resolve paths from script location, not cwd     | 2026-06-15 |
+```
+
+### 3. Link a project to it
+
+Set the path in that project's `_brain/memory/global_brain_link.md`:
+
+```
+## Path
+C:/dev/your-global-brain
+```
+
+From then on, every session in that project reads your global preferences right after its own
+`claude.md` — local project files still win if anything conflicts.
+
+### Why bother
+
+- Project 1 hits a bug once, logs the fix locally, and — since it recurred elsewhere — promotes
+  it to `pattern_log.md`
+- Project 2 hits the same class of bug, but the fix is already known before the AI starts
+  debugging
+- Project 3 never writes the buggy code in the first place, because the pattern existed before
+  the first line was typed
+
+Each new project starts blank on its own. The global repo is what makes project 3 smarter than
+project 1, for free, without a subscription.
 
 ---
 

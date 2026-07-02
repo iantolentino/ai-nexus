@@ -1,9 +1,9 @@
 # GLOBAL BRAIN LINK
 
 > Optional. Points this project at a personal "global brain" repo — a separate repo holding
-> your cross-project preferences and patterns, shared by every project you link to it. See
-> https://github.com/iantolentino/idt-global-brain for a working example (don't clone that one
-> directly — it's tuned to one person; build your own the same shape).
+> your cross-project preferences and patterns, shared by every project you link to it. See the
+> main `README.md` § Global Brain (Optional) for how to create your own — it's just three files:
+> `GLOBAL.md`, `preferences.md`, `patterns/pattern_log.md`.
 >
 > This file is project data — the installer/updater never touches it once you set it.
 
