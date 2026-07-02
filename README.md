@@ -149,7 +149,8 @@ _brain/
 ├── memory/                 ← Project context and architecture
 │   ├── app_context.md
 │   ├── system_architecture.md
-│   └── glossary.md
+│   ├── glossary.md
+│   └── global_brain_link.md ← Optional link to a personal cross-project memory repo
 ├── progress/               ← Task tracking
 │   ├── progress.md         ← AI reads this every session
 │   └── backlog.md
@@ -229,6 +230,17 @@ AI Nexus is designed to keep context small and predictable.
 - Never ask the AI to execute multiple tasks in one session
 - Never fix a bug without checking `fixes/fix_log.md` first, and never finish one without logging it
 - If something is unclear, consult `interaction/assumptions.md` — the AI is required to ask rather than guess
+
+---
+
+## Global Brain (Optional)
+
+Each project's `_brain/` is scoped to that one project — a new project always starts blank. If
+you want preferences and recurring patterns to carry over between your projects too, create a
+separate personal repo (see [idt-global-brain](https://github.com/iantolentino/idt-global-brain)
+for a working example — don't clone it, it's tuned to one person; copy its shape instead) and
+point `_brain/memory/global_brain_link.md` at your local clone of it. Local project files always
+win over the global repo on conflict.
 
 ---
 

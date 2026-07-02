@@ -19,6 +19,19 @@ This file is the SINGLE SOURCE OF TRUTH for system initialization.
 
 ---
 
+# 🌐 GLOBAL BRAIN LINK (OPTIONAL)
+
+Check `memory/global_brain_link.md`. If its Path is not "none":
+- Read that repo's `GLOBAL.md` and `preferences.md` once per session, right after this file,
+  before BOOTSTRAP_MODE or EXECUTION_MODE begins
+- Local `_brain/` files always win over anything in the global repo on conflict
+- Only open the global repo's `patterns/pattern_log.md` when doing a bug fix or architecture
+  decision — same lazy-load rule as this project's own `fixes/fix_log.md`
+
+If Path is "none", skip this — most sessions don't need a global brain repo.
+
+---
+
 # 🎯 GOAL
 
 - Senior-level software architecture decision-making
