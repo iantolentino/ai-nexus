@@ -38,22 +38,36 @@ The AI moves through four states in order. No state can be skipped.
 
 ### Step 1 — Add AI Nexus to your project
 
-Open a terminal in your project's root folder and run:
+Open a terminal in your project's root folder and run whichever fits your platform:
+
+```bash
+# Mac / Linux / WSL / Git Bash
+curl -fsSL https://raw.githubusercontent.com/iantolentino/ai-nexus/main/install.sh | bash
+```
+
+```powershell
+# Windows PowerShell (or pwsh on Mac/Linux)
+irm https://raw.githubusercontent.com/iantolentino/ai-nexus/main/install.ps1 | iex
+```
 
 ```bat
+:: Windows cmd.exe — download setup.bat into your project root first, then:
 setup.bat
 ```
 
-This downloads and installs the `_brain/` system into your project automatically.
+All three do the same thing and are safe to re-run any time:
 
-> **What setup.bat does:**
-> 1. Deletes any existing `_brain/` folder in your project
-> 2. Clones the AI Nexus repository from GitHub into a temporary `_brain/` folder
-> 3. Extracts only the `_brain/` contents from the clone (discards everything else)
-> 4. Flattens them into your project's `_brain/` folder
-> 5. Cleans up and confirms completion
->
-> After it runs, your project will have a `_brain/` folder with the full AI Nexus system ready to use.
+> 1. Clone the AI Nexus repository into a temp folder
+> 2. If `_brain/` doesn't exist yet → install it fresh
+> 3. If `_brain/` already exists → update framework files only (`claude.md`, `prompts/`,
+>    `governance/`, etc.) and **never touch your project data** (`memory/`, `progress/`,
+>    `fixes/fix_log.md`, `decisions/`, ...) — see `_brain/templates/update_rules.md`
+> 4. Drop root-level pointer files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.windsurfrules`,
+>    `.github/copilot-instructions.md`) — only where none already exist — so that **whichever AI
+>    tool you use, it auto-loads instructions to read `_brain/claude.md` first**, before scanning
+>    anything else. This is the main token-saving mechanism: one small file read up front instead
+>    of a full repo scan every session.
+> 5. Clean up and confirm completion
 
 ---
 
@@ -103,7 +117,11 @@ Repeat this for each session.
 
 If something breaks, copy and paste the contents of `_brain/prompts/debug_prompt.md` into a chat, then describe the problem.
 
-The AI will fix only what is broken — no refactoring, no feature additions.
+The AI will first check `_brain/fixes/fix_log.md` for a matching prior fix — if this exact bug (or
+one like it) was already solved in a past session, the AI reuses that root cause instead of
+re-diagnosing from scratch. Then it fixes only what is broken — no refactoring, no feature
+additions — and logs the fix back to `fixes/fix_log.md` before stopping, so the next session (or
+the next AI tool entirely) doesn't repeat the investigation.
 
 ---
 
@@ -112,10 +130,20 @@ The AI will fix only what is broken — no refactoring, no feature additions.
 ```
 _brain/
 ├── claude.md               ← Brain controller (DO NOT MODIFY)
+├── aibrain.md               ← Alias entry point (points back to claude.md)
+├── INDEX.md                 ← "I need to... → read this file" lookup table
 ├── prompts/                ← Paste these into your AI sessions
 │   ├── bootstrap_prompt.md ← Start a new project
 │   ├── continue_prompt.md  ← Resume work
 │   └── debug_prompt.md     ← Fix something broken
+├── fixes/                   ← BUG FIX MEMORY — always generated, core layer
+│   ├── README.md
+│   ├── fix_log.md           ← Checked before every debug session, updated after every fix
+│   └── _template.md         ← Copy for non-obvious/recurring fixes
+├── quick-ref/                ← TOKEN-EFFICIENCY LAYER — always generated
+│   ├── README.md
+│   ├── commands.md           ← Every command actually used in this project
+│   └── snippets.md           ← Canonical code patterns for this project
 ├── memory/                 ← Project context and architecture
 │   ├── app_context.md
 │   ├── system_architecture.md
@@ -141,21 +169,37 @@ _brain/
 ├── governance/             ← Scope and authority rules
 │   ├── rules.md
 │   └── scope.md
-├── security/               ← Auth and secrets policy
+├── security/               ← Auth and secrets policy (optional module)
 │   ├── auth_boundaries.md
 │   └── secrets_policy.md
-├── deployment/             ← Deployment plan and environments
+├── deployment/             ← Deployment plan and environments (optional module)
 │   ├── deployment.md
 │   └── environments.md
-├── releases/               ← Versioning and changelog
+├── db_backup/                ← DB backup policy — optional, only if project has a database
+│   └── backup_policy.md
+├── releases/                ← Versioning and changelog (optional module)
 │   ├── changelog.md
 │   └── versioning.md
 ├── skills/                 ← Tech stack and references
 │   ├── skills.md
 │   └── resources.md
+├── improvements/             ← Parking lot for non-urgent optimization ideas (optional)
+│   └── improvement_log.md
+├── tools/                    ← Inventory of CLI tools/scripts used (optional)
+│   └── tool_inventory.md
+├── staging/                  ← Scratch space for AI draft output (created on first use)
+│   └── README.md
+├── templates/                ← Reusable templates + self-update tooling
+│   ├── update_rules.md       ← What's safe to overwrite vs. never touch on update
+│   ├── repo_init_script.sh   ← Re-run any time to pull the latest framework files
+│   └── entrypoints/          ← Source files the installer copies to your project root
 └── guides/
     └── new_machine_setup.md ← Onboarding a new machine or developer
 ```
+
+At your project root, the installer also places (only where none already exists):
+`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.windsurfrules`, `.github/copilot-instructions.md` —
+each just a pointer telling whatever AI tool auto-loads it to read `_brain/claude.md` first.
 
 ---
 
@@ -175,9 +219,13 @@ AI Nexus is designed to keep context small and predictable.
 ## Rules
 
 - `claude.md` is the only file that controls AI behavior — never modify it during a project
+- Every AI tool must read `claude.md` in full before touching anything else — that's what the
+  root-level `CLAUDE.md` / `AGENTS.md` / `.cursorrules` / `.windsurfrules` /
+  `.github/copilot-instructions.md` pointer files enforce
 - All other `_brain/` files are data — the AI reads and writes them, you can read them anytime
 - Never skip a state
 - Never ask the AI to execute multiple tasks in one session
+- Never fix a bug without checking `fixes/fix_log.md` first, and never finish one without logging it
 - If something is unclear, consult `interaction/assumptions.md` — the AI is required to ask rather than guess
 
 ---

@@ -16,8 +16,10 @@ Rules:
 - Select ONE incomplete task from progress.md
 - Validate that all its dependencies are COMPLETE
 - If a dependency is not complete, select that dependency instead
+- If the task is a bug fix (`B###`), read `_brain/fixes/fix_log.md` first
 - Execute the selected task to full completion
-- Update `progress/progress.md` and `summaries/current_state.md`
+- Update `progress/progress.md` and `summaries/current_state.md` (and `fixes/fix_log.md` if this
+  was a bug fix)
 - Stop
 
 Do not plan. Do not re-explain the system. Do not propose future tasks.

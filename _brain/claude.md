@@ -1,8 +1,19 @@
 # AI OPERATING SYSTEM (BRAIN CONTROLLER)
 
 ENTRY POINT:
-This system is controlled ONLY through:
-- claude.md OR aibrain.md
+This system is controlled ONLY through this file: `_brain/claude.md`.
+`_brain/aibrain.md` is an alias — same entry point, different filename, for tools that look for
+that name instead. It is not a second source of truth; it just points back here.
+
+MANDATORY FIRST READ:
+Every AI tool operating on this repository — regardless of vendor (Claude, GPT, Copilot, Cursor,
+Windsurf, or any other) — MUST read this file in full BEFORE reading README.md, source code, or
+anything else. Root-level pointer files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.windsurfrules`,
+`.github/copilot-instructions.md`) exist for the sole purpose of forcing that first read, since most
+AI tools auto-load one of those filenames. They contain nothing but a pointer to this file.
+
+This is the primary token-saving mechanism of AI Nexus: one small file read up front replaces a
+full, repeated repository scan every session.
 
 This file is the SINGLE SOURCE OF TRUTH for system initialization.
 
@@ -13,17 +24,18 @@ This file is the SINGLE SOURCE OF TRUTH for system initialization.
 - Senior-level software architecture decision-making
 - Prevent overengineering AND underengineering
 - Token-efficient execution with controlled planning overhead
-- Business-grade production system design
+- Production-grade output for ANY program type — web app, backend service, CLI tool, script,
+  or automation/workflow — not just business SaaS
 - STRICT task completion guarantee (no partial outputs)
 - Deterministic execution flow (state machine + dependency graph)
-- Real-world scalable systems (SaaS / CRM / Ticketing / APIs)
+- Real-world systems at whatever scale the project actually needs (solo script → enterprise SaaS)
 
 ---
 
 # 0. PRIORITY HIERARCHY
 
 1. COMPLETION GUARANTEE ENGINE (task must be fully usable)
-2. BUSINESS VALUE GATE (only meaningful work allowed)
+2. VALUE GATE (only meaningful work allowed)
 3. DECISION ENGINE (architecture logic)
 4. DEPENDENCY GRAPH SYSTEM (execution ordering)
 5. STATE MACHINE RULES
@@ -169,15 +181,19 @@ If blocked:
 
 ---
 
-## 💼 3.9 BUSINESS VALUE GATE
+## 💼 3.9 VALUE GATE
 
 No feature exists unless it satisfies at least ONE:
 
 - increases revenue
 - reduces cost
-- improves efficiency
+- improves efficiency (including: saves manual/repetitive effort — the primary value metric
+  for automations and scripts, which have no "revenue" of their own)
 - reduces risk
-- improves user/business outcome
+- improves user/operator outcome
+
+"Business" outcome = the reason this program exists, whether that's a company, a personal
+automation, or an internal tool. The gate applies the same way regardless of project type.
 
 Otherwise:
 → REJECT or DEFER
@@ -314,6 +330,28 @@ Must include:
 
 ---
 
+## FIX MEMORY LAYER (ALWAYS GENERATED — NOT OPTIONAL)
+
+fixes/
+- README.md
+- fix_log.md
+- _template.md
+
+This folder is core, not optional, at any system size. See § BUG FIX MEMORY LAYER below.
+
+---
+
+## TOKEN-EFFICIENCY LAYER (ALWAYS GENERATED — NOT OPTIONAL)
+
+quick-ref/
+- README.md
+- commands.md
+- snippets.md
+
+Fill with real commands/patterns as soon as they exist — an empty quick-ref/ saves nothing.
+
+---
+
 ## OPTIONAL MODULE RULE
 
 Only generate if required:
@@ -321,8 +359,32 @@ Only generate if required:
 - deployment/
 - security/
 - releases/
+- improvements/ — generate once the project is past MVP and non-urgent ideas start accumulating
+- tools/ — generate once the project uses more than one CLI tool worth remembering
+- db_backup/ — generate ONLY if the project has a database
+- staging/ — generate on first use (AI needs scratch space for a draft mid-task)
 
 Otherwise omit
+
+---
+
+# 🧩 BUG FIX MEMORY LAYER
+
+Applies whenever a bug-fix task (`B###`, or any DEBUG_PROMPT session) runs, in any state that
+touches EXECUTION_MODE.
+
+BEFORE fixing:
+1. Read `fixes/fix_log.md`
+2. If a matching or related entry exists, reuse its root cause / fix instead of re-diagnosing
+
+AFTER fixing:
+1. Add one row to `fixes/fix_log.md` — always, no exceptions, even for a one-line fix
+2. If the fix was non-obvious or is likely to recur, also create `fixes/F###-slug.md` from
+   `fixes/_template.md` and link it from the log row
+3. Never delete a fix entry. If superseded, mark `SUPERSEDED` and link the replacement.
+
+This is what makes fixes/ actual memory instead of a changelog: the log is read BEFORE work, not
+just written after it.
 
 ---
 
@@ -338,6 +400,10 @@ Otherwise omit
 
 3. Validate dependency graph
 
+3.5. If the task is a bug fix (`B###`): check `fixes/fix_log.md` first — see § BUG FIX MEMORY LAYER.
+     If unsure which other file covers something needed for this task, check `INDEX.md` before
+     reading speculatively.
+
 4. EXECUTE (production-ready output)
 
 5. COMPLETION CHECK:
@@ -347,7 +413,8 @@ Otherwise omit
 
 If NOT → fix before continuing
 
-6. Update only changed files (minimal diff)
+6. Update only changed files (minimal diff). If this was a bug fix, this includes
+   `fixes/fix_log.md` — see § BUG FIX MEMORY LAYER.
 
 7. STOP
 
