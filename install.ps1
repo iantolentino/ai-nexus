@@ -35,19 +35,28 @@ try {
     if (Test-Path $Target) {
         Write-Host "_brain/ already exists - updating framework files only (project data untouched)."
         $FrameworkPaths = @(
-            "claude.md", "aibrain.md", "INDEX.md", "prompts", "governance", "interaction",
+            "claude.md", "aibrain.md", "INDEX.md", "overview", "prompts", "governance", "interaction",
             "tasks/task_rules.md", "tasks/task_templates.md", "templates",
             "fixes/README.md", "fixes/_template.md", "quick-ref/README.md"
         )
         foreach ($path in $FrameworkPaths) {
             $src = Join-Path $TmpDir "_brain/$path"
             $dest = Join-Path $Target $path
-            if (Test-Path $src) {
+            if (Test-Path $src -PathType Container) {
+                # Copy CONTENTS into an existing dest, not the folder itself — Copy-Item with an
+                # already-existing destination container nests the source folder inside it
+                # instead of merging/overwriting in place.
+                if (-not (Test-Path $dest)) {
+                    New-Item -ItemType Directory -Force -Path $dest -ErrorAction Stop | Out-Null
+                }
+                Copy-Item -Path (Join-Path $src "*") -Destination $dest -Recurse -Force -ErrorAction Stop
+                Write-Host "  updated: $path/"
+            } elseif (Test-Path $src) {
                 $destDir = Split-Path $dest -Parent
                 if ($destDir -and -not (Test-Path $destDir)) {
                     New-Item -ItemType Directory -Force -Path $destDir -ErrorAction Stop | Out-Null
                 }
-                Copy-Item -Path $src -Destination $dest -Recurse -Force -ErrorAction Stop
+                Copy-Item -Path $src -Destination $dest -Force -ErrorAction Stop
                 Write-Host "  updated: $path"
             }
         }

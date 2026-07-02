@@ -132,6 +132,8 @@ _brain/
 ├── claude.md               ← Brain controller (DO NOT MODIFY)
 ├── aibrain.md               ← Alias entry point (points back to claude.md)
 ├── INDEX.md                 ← "I need to... → read this file" lookup table
+├── overview/                ← Single-page summary of what this _brain system can do
+│   └── system_summary.md    ← Framework-maintained; refreshed by the installer
 ├── prompts/                ← Paste these into your AI sessions
 │   ├── bootstrap_prompt.md ← Start a new project
 │   ├── continue_prompt.md  ← Resume work

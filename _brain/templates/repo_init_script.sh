@@ -29,6 +29,7 @@ FRAMEWORK_PATHS=(
   "claude.md"
   "aibrain.md"
   "INDEX.md"
+  "overview"
   "prompts"
   "governance"
   "interaction"
@@ -43,9 +44,15 @@ FRAMEWORK_PATHS=(
 for path in "${FRAMEWORK_PATHS[@]}"; do
   src="$TMP_DIR/_brain/$path"
   dest="$TARGET/$path"
-  if [ -e "$src" ]; then
+  if [ -d "$src" ]; then
+    # trailing /. copies CONTENTS into dest — plain "cp -r src dest" would nest src
+    # inside an already-existing dest instead of merging/overwriting in place.
+    mkdir -p "$dest"
+    cp -rf "$src/." "$dest/"
+    echo "Updated: $path/"
+  elif [ -e "$src" ]; then
     mkdir -p "$(dirname "$dest")"
-    cp -rf "$src" "$dest"
+    cp -f "$src" "$dest"
     echo "Updated: $path"
   fi
 done

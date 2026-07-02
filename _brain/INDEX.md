@@ -11,6 +11,7 @@
 | I need to...                                  | Read                              |
 |------------------------------------------------|------------------------------------|
 | Know the rules that govern AI behavior          | `claude.md`                        |
+| See everything this _brain system can do (one page) | `overview/system_summary.md`   |
 | Understand what this project is                | `memory/app_context.md`            |
 | Understand the architecture                    | `memory/system_architecture.md`    |
 | Look up a project-specific term                | `memory/glossary.md`               |

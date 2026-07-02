@@ -16,6 +16,7 @@ These are identical across every AI Nexus install and contain no project-specifi
 - `tasks/task_rules.md`, `tasks/task_templates.md`
 - `templates/*`
 - `INDEX.md`
+- `overview/system_summary.md`
 - `fixes/README.md`, `fixes/_template.md`
 - `quick-ref/README.md`
 - All folder-level `README.md` files

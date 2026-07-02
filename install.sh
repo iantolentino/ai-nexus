@@ -31,16 +31,22 @@ git clone --depth 1 "$REPO" "$TMP_DIR" >/dev/null 2>&1
 if [ -d "$TARGET" ]; then
   echo "_brain/ already exists — updating framework files only (project data untouched)."
   FRAMEWORK_PATHS=(
-    "claude.md" "aibrain.md" "INDEX.md" "prompts" "governance" "interaction"
+    "claude.md" "aibrain.md" "INDEX.md" "overview" "prompts" "governance" "interaction"
     "tasks/task_rules.md" "tasks/task_templates.md" "templates"
     "fixes/README.md" "fixes/_template.md" "quick-ref/README.md"
   )
   for path in "${FRAMEWORK_PATHS[@]}"; do
     src="$TMP_DIR/_brain/$path"
     dest="$TARGET/$path"
-    if [ -e "$src" ]; then
+    if [ -d "$src" ]; then
+      # trailing /. copies CONTENTS into dest — plain "cp -r src dest" would nest src
+      # inside an already-existing dest instead of merging/overwriting in place.
+      mkdir -p "$dest"
+      cp -rf "$src/." "$dest/"
+      echo "  updated: $path/"
+    elif [ -e "$src" ]; then
       mkdir -p "$(dirname "$dest")"
-      cp -rf "$src" "$dest"
+      cp -f "$src" "$dest"
       echo "  updated: $path"
     fi
   done

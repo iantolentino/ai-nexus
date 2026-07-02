@@ -40,7 +40,7 @@ if exist "%TARGET%" (
         )
     )
 
-    for %%D in (prompts governance interaction templates) do (
+    for %%D in (overview prompts governance interaction templates) do (
         if exist "%TMP_DIR%\_brain\%%D" (
             xcopy "%TMP_DIR%\_brain\%%D" "%TARGET%\%%D\" /E /I /H /Y >nul
             echo   updated: %%D\
