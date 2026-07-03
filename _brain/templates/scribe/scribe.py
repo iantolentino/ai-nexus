@@ -110,7 +110,11 @@ def vlog(msg):
 
 def sh(args, cwd=None, check=True, inp=None):
     """Run a command, return stdout as text. Never raises unless check=True."""
-    r = subprocess.run(args, cwd=cwd, input=inp, capture_output=True, text=True)
+    # git always writes UTF-8 regardless of platform; decoding with the system
+    # locale (cp1252 on Windows) mangles any non-ASCII byte (e.g. em dashes in
+    # _brain templates) into mojibake. Force UTF-8 explicitly.
+    r = subprocess.run(args, cwd=cwd, input=inp, capture_output=True,
+                       text=True, encoding="utf-8", errors="replace")
     if check and r.returncode != 0:
         raise RuntimeError("command failed: %s\n%s" % (" ".join(args), r.stderr.strip()))
     return r.stdout
