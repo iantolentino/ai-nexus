@@ -306,6 +306,15 @@ From then on, every session in that project reads your global preferences right 
 Each new project starts blank on its own. The global repo is what makes project 3 smarter than
 project 1, for free, without a subscription.
 
+### 4. Optional: automate it with the scribe
+
+Promoting patterns by hand still works and stays useful for deliberate, human-judgment calls. If
+you'd rather have most of the ledger fill itself in, `_brain/templates/scribe/` runs after every
+commit, has Claude classify what the commit taught (a new skill, a bug worth remembering, a
+project milestone), and appends it — capped, policy-gated, append-only. See
+`_brain/templates/scribe/README.md` to enable it. The two approaches run side by side: promote by
+hand what you know matters, let the scribe catch everything else.
+
 ---
 
 ## Who This Is For

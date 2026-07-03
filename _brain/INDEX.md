@@ -13,6 +13,7 @@
 | Know the rules that govern AI behavior          | `claude.md`                        |
 | See everything this _brain system can do (one page) | `overview/system_summary.md`   |
 | Check if a personal global-brain repo is linked | `memory/global_brain_link.md`      |
+| Enable automatic cross-project learning on commit | `templates/scribe/README.md`     |
 | Understand what this project is                | `memory/app_context.md`            |
 | Understand the architecture                    | `memory/system_architecture.md`    |
 | Look up a project-specific term                | `memory/glossary.md`               |

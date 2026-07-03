@@ -46,3 +46,16 @@ These hold this specific project's real state — overwriting them destroys work
    exist yet in this project: create it fresh, do not attempt to merge
 4. Never touch anything in the "never overwrite" list
 5. Log the update in `releases/changelog.md` under `[Unreleased] → Changed`
+
+## Scribe folder (part of the framework — always overwrite)
+- `templates/scribe/scribe.py`
+- `templates/scribe/SCRIBE.md`
+- `templates/scribe/hooks/post-commit`
+- `templates/scribe/hooks/pre-push`
+- `templates/scribe/install-scribe.sh`
+- `templates/scribe/README.md`
+
+## Scribe folder (project data — never touch)
+- `templates/scribe/` does NOT contain project data;
+  project-specific state lives in `_brain/memory/global_brain_link.md`
+  (preserved as project data per the Memory section above).
