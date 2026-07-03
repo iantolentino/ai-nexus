@@ -567,6 +567,8 @@ def main():
                     help="exit non-zero on errors (default: fail-soft, exit 0)")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--print-brain-path", action="store_true")
+    ap.add_argument("--print-brain-remote", action="store_true",
+                    help="print the '## Repo' URL from global_brain_link.md (or 'none')")
     ap.add_argument("--set-brain-path", metavar="PATH")
     args = ap.parse_args()
     VERBOSE = args.verbose or args.dry_run
@@ -584,6 +586,9 @@ def main():
         brain, remote = read_brain_link(project_root)
         if args.print_brain_path:
             print(brain or "none")
+            return 0
+        if args.print_brain_remote:
+            print(remote or "none")
             return 0
         if not brain:
             vlog("no global brain path set — see _brain/memory/global_brain_link.md")

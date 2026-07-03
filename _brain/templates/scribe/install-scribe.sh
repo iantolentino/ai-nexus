@@ -46,20 +46,25 @@ if [ "$BRAIN" = "none" ] || [ -z "$BRAIN" ]; then
     "$PY" "$SRC/scribe.py" --set-brain-path "$DEFAULT"
     echo "Linked global brain: $DEFAULT"
   else
-    REPO_URL="https://github.com/iantolentino/idt-global-brain.git"
-    echo "Global brain not linked yet."
-    if [ -t 0 ]; then
-      printf "Clone %s to %s now? [Y/n] " "$REPO_URL" "$DEFAULT"
-      read -r ans
-      if [ "${ans:-Y}" != "n" ] && [ "${ans:-Y}" != "N" ]; then
-        git clone "$REPO_URL" "$DEFAULT"
-        "$PY" "$SRC/scribe.py" --set-brain-path "$DEFAULT"
-        echo "Linked global brain: $DEFAULT"
-      fi
+    REPO_URL="$("$PY" "$SRC/scribe.py" --print-brain-remote 2>/dev/null || echo none)"
+    if [ "$REPO_URL" = "none" ] || [ -z "$REPO_URL" ]; then
+      echo "No global brain linked, and no '## Repo' URL set in"
+      echo "_brain/memory/global_brain_link.md — set that first, or set Path directly."
     else
-      echo "Do it manually:"
-      echo "  git clone $REPO_URL \"$DEFAULT\""
-      echo "  $PY _brain/templates/scribe/scribe.py --set-brain-path \"$DEFAULT\""
+      echo "Global brain not cloned locally yet (Repo: $REPO_URL)."
+      if [ -t 0 ]; then
+        printf "Clone it to %s now? [Y/n] " "$DEFAULT"
+        read -r ans
+        if [ "${ans:-Y}" != "n" ] && [ "${ans:-Y}" != "N" ]; then
+          git clone "$REPO_URL" "$DEFAULT"
+          "$PY" "$SRC/scribe.py" --set-brain-path "$DEFAULT"
+          echo "Linked global brain: $DEFAULT"
+        fi
+      else
+        echo "Do it manually:"
+        echo "  git clone $REPO_URL \"$DEFAULT\""
+        echo "  $PY _brain/templates/scribe/scribe.py --set-brain-path \"$DEFAULT\""
+      fi
     fi
   fi
 else
