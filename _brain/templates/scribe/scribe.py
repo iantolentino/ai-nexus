@@ -52,6 +52,12 @@ import time
 import urllib.error
 import urllib.request
 
+# Windows consoles default stdout/stderr to the system codepage (e.g. cp1252),
+# which cannot encode characters like "≈" or "—" used in log output below.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 EMPTY_TREE = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
 DEFAULT_MODEL = os.environ.get("SCRIBE_MODEL", "claude-haiku-4-5-20251001")
 DIFF_LIMIT = int(os.environ.get("SCRIBE_DIFF_LIMIT", "16000"))
