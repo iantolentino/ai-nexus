@@ -500,6 +500,89 @@ System evolves in phases:
 
 ---
 
+# 🔍 CODE_REVIEW MODE (SPECIAL EXECUTION CONTEXT)
+
+Code review is a special mode outside the normal state machine. Triggered when:
+- User pastes `_brain/prompts/code_review_prompt.md` into a session
+- User explicitly asks for code review of a branch, PR, or diff
+
+## CODE_REVIEW FLOW
+
+1. Read `_brain/claude.md` (full) — understand project standards
+2. Read `_brain/governance/code_review_rules.md` — file skip patterns and severity baselines
+3. Read `_brain/skills/code_review_checklist.md` — evaluation framework
+4. Read `_brain/memory/app_context.md` (if exists) — project domain/constraints
+5. Check `_brain/fixes/fix_log.md` — skip findings already logged
+
+6. Identify files to review from user input (branch, PR, diff, or file list)
+
+7. Apply file skip patterns:
+   - **Always skip:** build/, node_modules/, dist/, .git/, .env.*, *.lock, coverage/
+   - **Skip unless explicitly requested:** test files, config files, docs/, markdown
+   - See `code_review_rules.md` for full patterns
+
+8. Review ONLY production code — prioritize by file type:
+   - Core business logic (highest risk)
+   - Supporting infrastructure (medium risk)
+   - UI/display layer (lower risk, but security-sensitive)
+   - Configuration (skip unless requested)
+
+9. Evaluate each file against the checklist:
+   - BUGS & CORRECTNESS (logic, nulls, error handling, edge cases, resources, concurrency)
+   - SECURITY (input validation, SQLi, XSS, auth/authz, secrets, CSRF)
+   - PERFORMANCE (queries, computation, memory, rendering, network)
+   - MAINTAINABILITY (clarity, DRY, SOLID, dead code, testing, docs)
+   - SCALABILITY (architecture, database, concurrency, caching, load handling)
+
+10. Report findings by severity:
+    - CRITICAL: Breaks functionality, security breach, data loss
+    - HIGH: Missing error handling, N+1 queries, unhandled exceptions
+    - MEDIUM: Code quality, maintainability debt, minor performance issues
+    - LOW: Style, nice-to-have optimizations, documentation
+
+11. Output format for each finding:
+    ```
+    ## [SEVERITY] Finding Title
+    **File:** path/to/file.ts:42
+    **Category:** [BUGS | SECURITY | PERFORMANCE | MAINTAINABILITY | SCALABILITY]
+    **What:** 1 sentence
+    **Why it matters:** Impact
+    **Fix:** Recommendation
+    ```
+
+12. Complete check:
+    - All non-skipped files reviewed?
+    - Findings organized by severity?
+    - Checked fix_log.md for duplicates?
+    - Findings are actionable and specific?
+
+13. Report findings (or "No findings" if clean)
+
+14. One sentence on overall code quality
+
+15. STOP
+
+## CODE_REVIEW PRIORITY
+
+- Protect production from bugs, security issues, and technical debt
+- Skip efficiency nitpicks
+- Focus on what actually breaks or matters at scale
+- Be precise: file + line + specific issue
+- Check memory first: if already logged, skip
+- No praise; focus on improvements
+
+## CODE_REVIEW TOKEN EFFICIENCY
+
+File skip patterns reduce token usage by 30–40%:
+- Skips test files (50% of many projects)
+- Skips node_modules, build artifacts, .git
+- Skips config files unless reviewing configuration
+- Prioritizes core logic (high-value review)
+
+Result: Review production code quality without reading boilerplate.
+
+---
+
 # 🏁 RESULT
 
 - deterministic execution engine

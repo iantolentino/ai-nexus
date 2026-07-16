@@ -113,7 +113,21 @@ Repeat this for each session.
 
 ---
 
-### Debugging
+### Step 5 — Code Review (Optional)
+
+For production code reviews with senior engineer rigor:
+
+Copy and paste the contents of `_brain/prompts/code_review_prompt.md` into a new chat, then provide a branch name, PR link, or specific files to review.
+
+The AI will:
+1. Skip boilerplate files (build artifacts, tests, node_modules, config) — **saves 30–40% tokens**
+2. Apply the senior engineer checklist (bugs, security, performance, maintainability, scalability)
+3. Report findings by severity
+4. Check `_brain/fixes/fix_log.md` to avoid re-reporting known issues
+
+---
+
+### Step 6 — Debugging
 
 If something breaks, copy and paste the contents of `_brain/prompts/debug_prompt.md` into a chat, then describe the problem.
 
@@ -137,6 +151,7 @@ _brain/
 ├── prompts/                ← Paste these into your AI sessions
 │   ├── bootstrap_prompt.md ← Start a new project
 │   ├── continue_prompt.md  ← Resume work
+│   ├── code_review_prompt.md ← Code review with senior engineer rigor
 │   └── debug_prompt.md     ← Fix something broken
 ├── fixes/                   ← BUG FIX MEMORY — always generated, core layer
 │   ├── README.md
@@ -171,7 +186,8 @@ _brain/
 │   └── response_rules.md
 ├── governance/             ← Scope and authority rules
 │   ├── rules.md
-│   └── scope.md
+│   ├── scope.md
+│   └── code_review_rules.md ← Code review baselines, file skip patterns, severity ranking
 ├── security/               ← Auth and secrets policy (optional module)
 │   ├── auth_boundaries.md
 │   └── secrets_policy.md
@@ -185,7 +201,8 @@ _brain/
 │   └── versioning.md
 ├── skills/                 ← Tech stack and references
 │   ├── skills.md
-│   └── resources.md
+│   ├── resources.md
+│   └── code_review_checklist.md ← Senior engineer code review evaluation framework
 ├── improvements/             ← Parking lot for non-urgent optimization ideas (optional)
 │   └── improvement_log.md
 ├── tools/                    ← Inventory of CLI tools/scripts used (optional)

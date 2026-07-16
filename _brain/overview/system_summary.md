@@ -31,6 +31,7 @@ remembers you" subscription — the memory lives in your own repo as plain markd
 |---|---|---|
 | Memory & continuity | `memory/`, `progress/`, `summaries/`, `decisions/`, `timelines/` | Project context, task state, and past decisions survive across sessions and across AI tools |
 | Bug fix memory | `fixes/` | `fix_log.md` is checked before every debug session and updated after — no bug gets re-diagnosed twice |
+| Code review | `prompts/code_review_prompt.md`, `governance/code_review_rules.md`, `skills/code_review_checklist.md` | Senior engineer code review with file-skip patterns (30-40% token savings), severity baselines, and systematic evaluation across bugs, security, performance, maintainability, and scalability |
 | Token efficiency | `INDEX.md`, `quick-ref/` | One lookup file tells the AI exactly which small file to open instead of scanning the repo |
 | Governance & guardrails | `governance/`, `interaction/`, `tasks/` | Hard rules on what the AI may read/write/assume per state, and when it must ask instead of guess |
 | Optional modules | `security/`, `deployment/`, `releases/`, `db_backup/`, `improvements/`, `tools/` | Generated only when the project actually needs them (see `claude.md` § OPTIONAL MODULE RULE) |

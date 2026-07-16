@@ -39,6 +39,9 @@
 | Update the `_brain` system itself               | `templates/update_rules.md`        |
 | Log a completed session for humans              | `summaries/weekly_summary.md`      |
 | See the current session snapshot                | `summaries/current_state.md`       |
+| **Conduct a code review**                       | `prompts/code_review_prompt.md`    |
+| Understand code review rules & baselines        | `governance/code_review_rules.md`  |
+| See the code review evaluation checklist        | `skills/code_review_checklist.md`  |
 
 ---
 
@@ -49,6 +52,7 @@
 | New project         | `claude.md` → `prompts/bootstrap_prompt.md`                                  |
 | Resume work         | `claude.md` → `progress/progress.md` → `summaries/current_state.md`          |
 | Fix a bug           | `claude.md` → `fixes/fix_log.md` → `summaries/current_state.md`              |
+| **Code review**     | **`claude.md` → `prompts/code_review_prompt.md`**                            |
 | New machine/dev     | `claude.md` → `guides/new_machine_setup.md`                                  |
 
 Never read more than this for a given session type. If you think you need more, that is a sign
