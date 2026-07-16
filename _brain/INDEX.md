@@ -10,7 +10,9 @@
 
 | I need to...                                  | Read                              |
 |------------------------------------------------|------------------------------------|
-| Know the rules that govern AI behavior          | `claude.md`                        |
+| **Know the rules that govern AI behavior**      | **`claude.md` (THIS FILE FIRST)** |
+| **Make sure required skills are installed**     | **`skills/REQUIRED_SKILLS_MANIFEST.md`** |
+| **Conduct a code review (ONE PAGE)**            | **`skills/code_review_quick_ref.md`** |
 | See everything this _brain system can do (one page) | `overview/system_summary.md`   |
 | Check if a personal global-brain repo is linked | `memory/global_brain_link.md`      |
 | Enable automatic cross-project learning on commit | `templates/scribe/README.md`     |

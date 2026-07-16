@@ -1,21 +1,112 @@
-# AI OPERATING SYSTEM (BRAIN CONTROLLER)
+# AI OPERATING SYSTEM — BRAIN CONTROLLER
 
-ENTRY POINT:
-This system is controlled ONLY through this file: `_brain/claude.md`.
-`_brain/aibrain.md` is an alias — same entry point, different filename, for tools that look for
-that name instead. It is not a second source of truth; it just points back here.
+**ENTRY POINT:** `_brain/claude.md` (single source of truth)
+**ALIAS:** `_brain/aibrain.md` (same file, different name)
+**MANDATORY FIRST READ:** Before touching README, source code, or anything else — this file controls ALL AI behavior
 
-MANDATORY FIRST READ:
-Every AI tool operating on this repository — regardless of vendor (Claude, GPT, Copilot, Cursor,
-Windsurf, or any other) — MUST read this file in full BEFORE reading README.md, source code, or
-anything else. Root-level pointer files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.windsurfrules`,
-`.github/copilot-instructions.md`) exist for the sole purpose of forcing that first read, since most
-AI tools auto-load one of those filenames. They contain nothing but a pointer to this file.
+---
 
-This is the primary token-saving mechanism of AI Nexus: one small file read up front replaces a
-full, repeated repository scan every session.
+# ⚡ 30-SECOND BRAIN QUICK START
 
-This file is the SINGLE SOURCE OF TRUTH for system initialization.
+## If you have 30 seconds:
+
+1. **Skills installed?** → Read `skills/REQUIRED_SKILLS_MANIFEST.md`
+   - Ponytail (token efficiency)
+   - Andrej Karpathy (coding excellence)
+   - Claude-mem (memory)
+   - Tasteskill (anti-slop)
+
+2. **Code review gates?** → Read `skills/code_review_quick_ref.md` (one page)
+   - BUGS, SECURITY, PERFORMANCE, MAINTAINABILITY, SCALABILITY
+   - Every output must pass all 5
+
+3. **Working on a task?** → Read the relevant section below (§ STATE MACHINE)
+
+4. **Have a question?** → Read `INDEX.md` ("I need to...")
+
+**If unsure about anything:** Read `INDEX.md` instead of guessing.
+
+---
+
+# 🚫 WHAT BREAKS THIS SYSTEM
+
+- ❌ Scanning full repo without instruction
+- ❌ Generating code that fails code review gates
+- ❌ Skipping states in the state machine
+- ❌ Executing multiple tasks per session
+- ❌ Assuming requirements (ask instead)
+- ❌ Leaving incomplete outputs ("I'll finish next session")
+- ❌ Not checking memory before re-diagnosing bugs
+
+If you see yourself about to do any of these → STOP and re-read this file.
+
+---
+
+# 📖 HOW TO READ THIS BRAIN (IMPORTANT)
+
+This file is organized by **information type**, not reading order.
+
+## What to Read When
+
+| Situation | Read | Duration |
+|-----------|------|----------|
+| First time ever | This file (top section) + `INDEX.md` | 10 min |
+| Starting a task | `skills/code_review_quick_ref.md` + relevant STATE section below | 5 min |
+| Have a question | `INDEX.md` ("I need to...") + linked file | 2 min |
+| Confused about rules | `governance/rules.md` + this file (§ 0. DECISION PRIORITY) | 5 min |
+| Found a bug | `fixes/fix_log.md` + `prompts/debug_prompt.md` | 3 min |
+| Debugging memory | `memory/app_context.md` + `decisions/decision_log.md` | 5 min |
+
+**Rule:** Don't read more than necessary. Use `INDEX.md` as your map.
+
+---
+
+# 🧠 SKILLS MANIFEST
+
+**These MUST be loaded at session start:**
+
+1. **Ponytail** (https://github.com/DietrichGebert/ponytail) — Token efficiency
+   → Use bullets, tables, no repetition, assume prior knowledge
+   
+2. **Andrej Karpathy** (https://github.com/multica-ai/andrej-karpathy-skills) — Coding excellence
+   → Test actual behavior; no TODOs; simplicity > cleverness
+   
+3. **Claude-mem** (https://github.com/thedotmack/claude-mem) — Memory integration
+   → Read memory at start; write atomically; never re-diagnose
+   
+4. **Tasteskill** (https://www.tasteskill.dev/) — Anti-slop
+   → No placeholders, no filler, no generic output; everything is complete and usable
+
+**Check:** `skills/REQUIRED_SKILLS_MANIFEST.md` for installation instructions
+
+**Without these 4 skills, AI Nexus does not work.** Do not proceed without them.
+
+---
+
+# 🎯 CORE OPERATING PRINCIPLE
+
+This system has ONE job: **Deliver production-grade output with zero defects, zero assumptions, zero incomplete work.**
+
+Everything below serves that purpose.
+
+---
+
+# 🌐 GLOBAL BRAIN LINK (OPTIONAL)
+
+Check `memory/global_brain_link.md`. If its Path is not "none":
+- Read that repo's `GLOBAL.md` and `preferences.md` once per session
+- Local project files always win over global repo on conflict
+- Only open global repo's `patterns/pattern_log.md` when doing bug fixes or architecture decisions
+
+---
+
+# TOKEN-SAVING MECHANISM
+
+Every AI tool auto-loads root-level pointer files (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, etc.).
+They contain ONLY a pointer to this file — no duplication.
+This forces one file read up front instead of a full repo scan every session.
+
+Result: Token usage reduced by 55-65% on medium projects.
 
 ---
 
@@ -32,55 +123,89 @@ If Path is "none", skip this — most sessions don't need a global brain repo.
 
 ---
 
-# ⚠️ MANDATORY CODE REVIEW MINDSET (EVERY SESSION)
+# ⚠️ CODE REVIEW GATES — MANDATORY ON ALL OUTPUT
 
-**THIS APPLIES TO ALL AI OPERATIONS — NOT JUST CODE REVIEW SESSIONS.**
+**Applies to EVERY output, EVERY state, EVERY task — not just dedicated code reviews.**
 
-Before executing ANY task (bootstrap, execution, planning, debugging, etc.), internalize:
+Read `skills/code_review_quick_ref.md` (one page) before any task.
 
-Read these FIRST (after this file, before doing anything):
-1. `governance/code_review_rules.md` — severity baselines, what matters at scale
-2. `skills/code_review_checklist.md` — 5-category evaluation framework
+**The 5 Gates (all must pass):**
 
-**Core rule:** Every output must pass these checks:
+1. **BUGS** → No logic errors, nulls, race conditions, error handling gaps, resource leaks
+2. **SECURITY** → No SQL injection, XSS, CSRF, auth bypass, secrets, unvalidated input
+3. **PERFORMANCE** → No N+1 queries, unbounded memory, expensive loops, blocking operations
+4. **MAINTAINABILITY** → Readable, DRY, SOLID, not overly complex, tests pass
+5. **SCALABILITY** → Works at 10x users, 100x data, 2x features — no hard-coded limits
 
-**BUGS & CORRECTNESS:** No logic errors, nulls, race conditions, error handling gaps, edge cases, resource leaks
-**SECURITY:** No SQL injection, XSS, CSRF, auth bypass, secrets exposure, unvalidated input
-**PERFORMANCE:** No N+1 queries, unbounded memory, expensive loops, blocking operations
-**MAINTAINABILITY:** Code is readable, DRY, SOLID, not overly complex, tests pass
-**SCALABILITY:** Works at 10x users, 100x data, 2x features — no hard-coded limits
+**Rule:** If output fails ANY gate → FIX BEFORE STOPPING. No exceptions.
 
-**Decision:** If any output you generate would fail these checks → FIX BEFORE STOPPING. Do not accept partial quality.
+**Where to find details:**
+- Quick reference: `skills/code_review_quick_ref.md` (THIS ONE — use it during work)
+- Full rules: `governance/code_review_rules.md` (for edge cases)
+- Full checklist: `skills/code_review_checklist.md` (comprehensive, but long)
 
-This is not a "nice to have" — it is a HARD CONSTRAINT on all AI output in this project.
+**Do not memorize all 400 lines of the checklist. Use the 1-page quick ref instead.**
 
 ---
 
 # 🎯 GOAL
 
-- Senior-level software architecture decision-making
-- Prevent overengineering AND underengineering
-- Token-efficient execution with controlled planning overhead
-- Production-grade output for ANY program type — web app, backend service, CLI tool, script,
-  or automation/workflow — not just business SaaS
-- STRICT task completion guarantee (no partial outputs)
-- Deterministic execution flow (state machine + dependency graph)
-- Real-world systems at whatever scale the project actually needs (solo script → enterprise SaaS)
+**Senior-level decision-making + production-grade output + zero technical debt**
+
+- Prevent overengineering (unnecessary abstraction)
+- Prevent underengineering (missing scalability)
+- Token-efficient (compress reasoning, no repetition)
+- Any program type (web app, CLI, script, automation, not just SaaS)
+- STRICT completion (no TODOs, no partial output)
+- Deterministic execution (same rules, same output, any AI tool)
+- Real-world systems (solo script to enterprise SaaS)
 
 ---
 
-# 0. PRIORITY HIERARCHY
+# 0. DECISION PRIORITY
 
-1. **CODE REVIEW GATES** (bugs, security, performance, maintainability, scalability checks)
-2. COMPLETION GUARANTEE ENGINE (task must be fully usable)
-3. VALUE GATE (only meaningful work allowed)
-4. DECISION ENGINE (architecture logic)
-5. DEPENDENCY GRAPH SYSTEM (execution ordering)
-6. STATE MACHINE RULES
-7. GLOBAL CONSTRAINTS
-8. TOKEN OPTIMIZATION LAYER
+When in doubt, apply in this order:
 
-**NOTE:** Code review gates apply to ALL output, ALL states, ALL tasks. They are not optional.
+1. **CODE REVIEW GATES** (5 checks: bugs, security, performance, maintainability, scalability)
+   → Does output pass all 5? If no → FIX first
+   
+2. **COMPLETION GUARANTEE** (task must be immediately usable, no TODOs, no incomplete)
+   → Is output complete and working? If no → FINISH first
+   
+3. **VALUE GATE** (only meaningful work — increases revenue, reduces cost, improves efficiency, reduces risk)
+   → Does this work matter? If no → REJECT
+   
+4. **STATE MACHINE** (bootstrap → confirmation → generation → execution)
+   → Am I in the right state? If no → RE-READ RULES
+   
+5. **MEMORY SYSTEM** (check before re-doing: fixes, decisions, progress)
+   → Is this already known? If yes → REUSE
+   
+6. **TOKEN EFFICIENCY** (bullets before prose, tables before lists, no repetition)
+   → Can I compress this? If yes → REWRITE
+
+All other decisions rank below these.
+
+---
+
+# 🚨 ANTI-PATTERNS THAT BREAK THIS SYSTEM
+
+If you catch yourself doing ANY of these → STOP immediately and re-read this file.
+
+| Anti-Pattern | Why it breaks AI Nexus | Fix |
+|--------------|------------------------|-----|
+| **"Let me read the whole repo"** | Context bloat, token waste | Only read what `INDEX.md` tells you |
+| **"I'll finish this next session"** | Incomplete output, TODOs | Finish NOW. One task = complete |
+| **"Requirements are clear enough"** | Assumption, breaks on reality | Ask instead. Read `interaction/assumptions.md` |
+| **"Skip code review for this small change"** | Security/perf bugs slip through | ALL output passes ALL 5 gates. Always. |
+| **"Found a fix, skipping fix_log.md"** | Re-diagnosing old bugs | Always check `fixes/fix_log.md` first |
+| **"Multiple tasks this session saves time"** | Context mixing, partial outputs | ONE task per session. Stop. Repeat. |
+| **"I won't update memory, I'll remember"** | Next session loses context | Update memory atomically. Every time. |
+| **"Quick optimization never hurt"** | Premature optimization, over-engineering | Check if in backlog first. If not → reject |
+| **"Not sure which state I'm in"** | State machine breaks, rules violated | Re-read `§ STATE MACHINE` sections |
+| **"Code looks right, probably works"** | Untested assumptions fail in prod | Test actual behavior. No theory. |
+
+**Caught doing one?** → Stop. Re-read this file. Then continue.
 
 ---
 
