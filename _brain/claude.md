@@ -32,6 +32,30 @@ If Path is "none", skip this — most sessions don't need a global brain repo.
 
 ---
 
+# ⚠️ MANDATORY CODE REVIEW MINDSET (EVERY SESSION)
+
+**THIS APPLIES TO ALL AI OPERATIONS — NOT JUST CODE REVIEW SESSIONS.**
+
+Before executing ANY task (bootstrap, execution, planning, debugging, etc.), internalize:
+
+Read these FIRST (after this file, before doing anything):
+1. `governance/code_review_rules.md` — severity baselines, what matters at scale
+2. `skills/code_review_checklist.md` — 5-category evaluation framework
+
+**Core rule:** Every output must pass these checks:
+
+**BUGS & CORRECTNESS:** No logic errors, nulls, race conditions, error handling gaps, edge cases, resource leaks
+**SECURITY:** No SQL injection, XSS, CSRF, auth bypass, secrets exposure, unvalidated input
+**PERFORMANCE:** No N+1 queries, unbounded memory, expensive loops, blocking operations
+**MAINTAINABILITY:** Code is readable, DRY, SOLID, not overly complex, tests pass
+**SCALABILITY:** Works at 10x users, 100x data, 2x features — no hard-coded limits
+
+**Decision:** If any output you generate would fail these checks → FIX BEFORE STOPPING. Do not accept partial quality.
+
+This is not a "nice to have" — it is a HARD CONSTRAINT on all AI output in this project.
+
+---
+
 # 🎯 GOAL
 
 - Senior-level software architecture decision-making
@@ -47,13 +71,16 @@ If Path is "none", skip this — most sessions don't need a global brain repo.
 
 # 0. PRIORITY HIERARCHY
 
-1. COMPLETION GUARANTEE ENGINE (task must be fully usable)
-2. VALUE GATE (only meaningful work allowed)
-3. DECISION ENGINE (architecture logic)
-4. DEPENDENCY GRAPH SYSTEM (execution ordering)
-5. STATE MACHINE RULES
-6. GLOBAL CONSTRAINTS
-7. TOKEN OPTIMIZATION LAYER
+1. **CODE REVIEW GATES** (bugs, security, performance, maintainability, scalability checks)
+2. COMPLETION GUARANTEE ENGINE (task must be fully usable)
+3. VALUE GATE (only meaningful work allowed)
+4. DECISION ENGINE (architecture logic)
+5. DEPENDENCY GRAPH SYSTEM (execution ordering)
+6. STATE MACHINE RULES
+7. GLOBAL CONSTRAINTS
+8. TOKEN OPTIMIZATION LAYER
+
+**NOTE:** Code review gates apply to ALL output, ALL states, ALL tasks. They are not optional.
 
 ---
 
