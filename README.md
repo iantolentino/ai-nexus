@@ -23,6 +23,15 @@ AI Nexus fixes this with a strict **4-state execution model** and a memory syste
 
 All AI behavior is governed by `_brain/claude.md` (the brain controller).
 
+**When the AI reads claude.md, it:**
+- Loads 4 mandatory skills (Ponytail, Andrej Karpathy, Claude-mem, Tasteskill)
+- Enables 5 code review gates (bugs, security, performance, maintainability, scalability)
+- Activates memory system (fixes, decisions, progress tracking)
+- Enters the state machine (bootstrap → confirmation → generation → execution)
+- Applies token efficiency rules (compress output, no repetition)
+
+**Result:** Every output is production-grade, deterministic, and traceable.
+
 The AI moves through four states in order. No state can be skipped.
 
 | State | Name | What Happens |
@@ -34,7 +43,26 @@ The AI moves through four states in order. No state can be skipped.
 
 ---
 
-## Quick Start
+## ⚡ Quick Start (30 seconds)
+
+### The Simplest Flow
+
+**You already have `_brain/` folder in your project?**
+
+```bash
+# 1. You're done with setup
+# 2. Open your AI chat (Claude Code, Claude.ai, ChatGPT, etc.)
+# 3. First message:
+
+"Read _brain/claude.md as your brain controller. 
+I'm working on [project description]. What's next?"
+```
+
+**That's it.** The AI loads the brain. You work. All rules enforced automatically.
+
+---
+
+## Full Setup
 
 ### Step 1 — Add AI Nexus to your project
 
@@ -75,7 +103,15 @@ All three do the same thing and are safe to re-run any time:
 
 Open a new AI chat session (Claude, ChatGPT, or any LLM).
 
-Copy and paste the contents of `_brain/prompts/bootstrap_prompt.md` into the chat.
+**First message:**
+```
+Read _brain/claude.md as your brain controller.
+
+Then we'll bootstrap a new project.
+```
+
+**Second message:**
+Copy and paste the contents of `_brain/prompts/bootstrap_prompt.md`.
 
 The AI will enter BOOTSTRAP_MODE and ask you 8 questions about your project. Answer them.
 
@@ -100,7 +136,15 @@ The AI will then generate the full `_brain/` planning structure for your project
 
 For every new session where you want to continue building:
 
-Copy and paste the contents of `_brain/prompts/continue_prompt.md` into a new chat.
+**First message:**
+```
+Read _brain/claude.md as your brain controller.
+
+Then continue the project.
+```
+
+**Second message:**
+Copy and paste the contents of `_brain/prompts/continue_prompt.md`.
 
 The AI will:
 1. Read `_brain/progress/progress.md` and `_brain/summaries/current_state.md`
@@ -117,7 +161,15 @@ Repeat this for each session.
 
 For production code reviews with senior engineer rigor:
 
-Copy and paste the contents of `_brain/prompts/code_review_prompt.md` into a new chat, then provide a branch name, PR link, or specific files to review.
+**First message:**
+```
+Read _brain/claude.md as your brain controller.
+
+Then review code: [branch name / PR link / files]
+```
+
+**Second message:**
+Copy and paste the contents of `_brain/prompts/code_review_prompt.md`, then describe what to review.
 
 The AI will:
 1. Skip boilerplate files (build artifacts, tests, node_modules, config) — **saves 30–40% tokens**
@@ -129,7 +181,17 @@ The AI will:
 
 ### Step 6 — Debugging
 
-If something breaks, copy and paste the contents of `_brain/prompts/debug_prompt.md` into a chat, then describe the problem.
+If something breaks:
+
+**First message:**
+```
+Read _brain/claude.md as your brain controller.
+
+Then help me debug this issue: [description]
+```
+
+**Second message:**
+Copy and paste the contents of `_brain/prompts/debug_prompt.md`.
 
 The AI will first check `_brain/fixes/fix_log.md` for a matching prior fix — if this exact bug (or
 one like it) was already solved in a past session, the AI reuses that root cause instead of
@@ -220,6 +282,29 @@ _brain/
 At your project root, the installer also places (only where none already exists):
 `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.windsurfrules`, `.github/copilot-instructions.md` —
 each just a pointer telling whatever AI tool auto-loads it to read `_brain/claude.md` first.
+
+---
+
+## 🎯 Mandatory Skills & Key References
+
+Before using AI Nexus, ensure these 4 skills are loaded in the AI:
+
+| Skill | Source | What it does |
+|-------|--------|-------------|
+| **Ponytail** | https://github.com/DietrichGebert/ponytail | Token efficiency (bullets, tables, no repetition) |
+| **Andrej Karpathy** | https://github.com/multica-ai/andrej-karpathy-skills | Coding excellence (no TODOs, test actual behavior) |
+| **Claude-mem** | https://github.com/thedotmack/claude-mem | Memory integration (cross-session continuity) |
+| **Tasteskill** | https://www.tasteskill.dev/ | Anti-slop (no placeholders, everything usable) |
+
+See `_brain/skills/REQUIRED_SKILLS_MANIFEST.md` for installation details.
+
+**Key reference files you'll use:**
+
+| File | Purpose | Use When |
+|------|---------|----------|
+| `_brain/claude.md` | Brain controller + rules | Every session (mandatory first read) |
+| `_brain/skills/code_review_quick_ref.md` | One-page code review guide | During code review (printable) |
+| `_brain/INDEX.md` | "I need to..." lookup table | You have a question |
 
 ---
 
