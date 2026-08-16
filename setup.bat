@@ -67,7 +67,7 @@ if exist "%TARGET%" (
         echo   updated: quick-ref\README.md
     )
 
-    for %%F in (tools\brain-doctor.ps1 tools\context-metrics.ps1 tools\select-context.ps1 daily\TEMPLATE.md sessions\CHECKPOINT.md decisions\ADR-TEMPLATE.md) do (
+    for %%F in (tools\brain-doctor.ps1 tools\context-metrics.ps1 tools\select-context.ps1 tools\context-diff.ps1 tools\handoff-baseline.ps1 daily\TEMPLATE.md sessions\CHECKPOINT.md decisions\ADR-TEMPLATE.md) do (
         if exist "%TMP_DIR%\_brain\%%F" (
             for %%P in ("%TARGET%\%%F") do if not exist "%%~dpP" mkdir "%%~dpP"
             copy /y "%TMP_DIR%\_brain\%%F" "%TARGET%\%%F" >nul

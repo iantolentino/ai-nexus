@@ -112,6 +112,30 @@ Run the metrics command to inspect the current brain size:
 pwsh -NoProfile -File _brain/tools/context-metrics.ps1
 ```
 
+## Git-aware continuation
+
+For terminal agents, AI Nexus can load only what changed since the previous handoff.
+
+Before stopping a session, generate a Git baseline and paste it into `sessions/LATEST_HANDOFF.md`:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/handoff-baseline.ps1
+```
+
+At the next session, generate a diff from that baseline:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/context-diff.ps1
+```
+
+The diff records the branch, current commit, changed files, staged/unstaged work, and untracked files. The selector includes `CONTEXT_DIFF.md` only when it contains a real current commit, so a placeholder never adds context.
+
+```text
+Previous handoff + Git context diff + affected source files
+```
+
+replaces rereading unchanged code or broad repository history.
+
 ## Brain layout
 
 ```text

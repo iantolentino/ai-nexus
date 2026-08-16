@@ -31,3 +31,10 @@
 ## Warnings
 
 - [Things the next session must not accidentally change]
+
+## Git Baseline
+
+- Base commit: [full Git commit SHA at handoff]
+- Branch: [branch name]
+- Working tree at handoff: [clean / has uncommitted changes]
+- Verification: [tests/checks run, or not yet run]
