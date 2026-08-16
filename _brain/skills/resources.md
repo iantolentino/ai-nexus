@@ -25,5 +25,5 @@
 | Architecture overview | `memory/system_architecture.md`     |
 | Environment setup     | `deployment/environments.md`        |
 | New machine setup     | `guides/new_machine_setup.md`       |
-| Task list             | `progress/backlog.md`               |
+| Active work           | `CURRENT_STATE.md`                  |
 | Decision history      | `decisions/decision_log.md`         |

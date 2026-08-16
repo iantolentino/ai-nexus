@@ -35,8 +35,7 @@ try {
     if (Test-Path $Target) {
         Write-Host "_brain/ already exists - updating framework files only (project data untouched)."
         $FrameworkPaths = @(
-            "INDEX.md", "overview", "prompts", "governance", "interaction",
-            "tasks/task_rules.md", "tasks/task_templates.md", "templates",
+            "overview", "prompts", "governance", "interaction", "templates",
             "fixes/README.md", "fixes/_template.md", "quick-ref/README.md",
             "AI_BRAIN.md", "BRAIN_INDEX.md", "BRAIN_CHANGELOG.md", "CONTINUE_PROMPT.md",
             "intents", "tools/brain-doctor.ps1", "tools/context-metrics.ps1", "tools/select-context.ps1",

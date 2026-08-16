@@ -35,8 +35,8 @@ If the user requests a scope change during EXECUTION_MODE:
 
 1. Stop the current task
 2. Log the change request in `decisions/decision_log.md`
-3. Update `progress/backlog.md` with new or removed tasks
-4. Update `timelines/actual_timeline.md`
+3. Update `CURRENT_STATE.md` with the changed objective or next action
+4. Record a decision when scope changed materially
 5. Resume from the next appropriate task
 
 No scope change takes effect until it is written to this file and backlog.md.

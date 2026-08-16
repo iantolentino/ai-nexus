@@ -8,7 +8,7 @@ This includes:
 - User preferences not written in this file or app_context.md
 - Stack choices not defined in `skills/skills.md`
 - Feature scope beyond the confirmed backlog
-- Timelines not defined in `timelines/`
+- Delivery constraints not captured in the active task specification or decision record
 
 ---
 

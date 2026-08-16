@@ -1,65 +1,27 @@
-# UPDATE RULES — UPGRADING AN EXISTING _brain
+# Update Rules
 
-> Applies when `install.sh` / `install.ps1` / `setup.bat` is run in a project that already has a
-> `_brain/` folder with real project data in it. A blind re-clone would destroy that data — never
-> do that.
+When an installer updates an existing `_brain/`, it refreshes framework files but preserves project knowledge.
 
----
+## Safe to overwrite
 
-## Files Safe to Overwrite (framework files — no project data)
-These are identical across every AI Nexus install and contain no project-specific content:
-
-- `prompts/*`
-- `governance/*`
-- `interaction/*`
-- `tasks/task_rules.md`, `tasks/task_templates.md`
-- `templates/*`
-- `INDEX.md`
-- `overview/system_summary.md`
-- `fixes/README.md`, `fixes/_template.md`
-- `quick-ref/README.md`
 - `AI_BRAIN.md`, `BRAIN_INDEX.md`, `BRAIN_CHANGELOG.md`, `CONTINUE_PROMPT.md`
-- `intents/*`, `tools/brain-doctor.ps1`, `tools/context-metrics.ps1`, `tools/select-context.ps1`
+- `prompts/*`, `governance/*`, `interaction/*`, `intents/*`, `overview/*`, `templates/*`
+- `tools/brain-doctor.ps1`, `tools/context-metrics.ps1`, `tools/select-context.ps1`
 - `daily/TEMPLATE.md`, `sessions/CHECKPOINT.md`, `decisions/ADR-TEMPLATE.md`
-- All folder-level `README.md` files
+- Framework documentation and provider entry-point templates
 
-## Files That Must NEVER Be Overwritten (project data)
-These hold this specific project's real state — overwriting them destroys work:
+## Never overwrite
 
-- `memory/*`
-- `progress/*`
-- `decisions/*`
-- `timelines/*`
-- `summaries/*`
-- `security/*`
-- `deployment/*`
-- `releases/*`
-- `skills/*`
-- `fixes/fix_log.md` and any `fixes/F###-*.md` files
-- `quick-ref/commands.md`, `quick-ref/snippets.md`
-- `improvements/improvement_log.md`
-- `tools/tool_inventory.md`
-- `db_backup/backup_policy.md`
 - `CURRENT_STATE.md`, `CONTEXT_DIFF.md`, `daily/YYYY-MM-DD.md`
-- `sessions/LATEST_HANDOFF.md`, `sessions/manifests/*`, `architecture/*`
+- `sessions/LATEST_HANDOFF.md`, `sessions/manifests/*`, `sessions/archive/*`
+- `architecture/*`, project ADRs, project-specific `memory/*`
+- `fixes/fix_log.md` and fix detail files
+- `security/*`, `deployment/*`, `releases/*`, `skills/*`, `db_backup/*`
+- Project-specific quick references, tool inventory, and improvement log
 
-## Update Procedure
-1. Diff incoming framework files against existing ones
-2. Overwrite ONLY the "safe to overwrite" list above
-3. For any new folder introduced by a newer AI Nexus version (e.g. a future module) that doesn't
-   exist yet in this project: create it fresh, do not attempt to merge
-4. Never touch anything in the "never overwrite" list
-5. Log the update in `releases/changelog.md` under `[Unreleased] → Changed`
+## Update process
 
-## Scribe folder (part of the framework — always overwrite)
-- `templates/scribe/scribe.py`
-- `templates/scribe/SCRIBE.md`
-- `templates/scribe/hooks/post-commit`
-- `templates/scribe/hooks/pre-push`
-- `templates/scribe/install-scribe.sh`
-- `templates/scribe/README.md`
-
-## Scribe folder (project data — never touch)
-- `templates/scribe/` does NOT contain project data;
-  project-specific state lives in `_brain/memory/global_brain_link.md`
-  (preserved as project data per the Memory section above).
+1. Copy only safe framework paths.
+2. Create new framework folders only when absent.
+3. Never delete or overwrite project knowledge during an update.
+4. Record a material framework update in the project's release notes when applicable.

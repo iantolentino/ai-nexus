@@ -20,7 +20,3 @@ Suggested summaries:
 2. `summaries/bugs-summary.json` — bug-fix work
 3. `summaries/projects-summary.json` — retrospectives or prior-project lookup
 4. `summaries/references-summary.json` — standards/specification citations
-
-## Optional scribe
-
-The scribe can append commit-derived knowledge to a global brain when deliberately enabled. It is optional and must not affect normal session startup.
