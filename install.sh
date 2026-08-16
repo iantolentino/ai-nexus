@@ -34,7 +34,7 @@ if [ -d "$TARGET" ]; then
     "overview" "prompts" "governance" "interaction" "templates"
     "fixes/README.md" "fixes/_template.md" "quick-ref/README.md"
     "AI_BRAIN.md" "BRAIN_INDEX.md" "BRAIN_CHANGELOG.md" "CONTINUE_PROMPT.md"
-    "intents" "modules" "fixes" "tools/brain-doctor.ps1" "tools/context-metrics.ps1" "tools/select-context.ps1" "tools/context-diff.ps1" "tools/handoff-baseline.ps1" "tools/handoff-compact.ps1" "tools/session-checkpoint.ps1" "tools/slice-file.ps1" "tools/dependency-boundary.ps1" "tools/error-fingerprint.ps1" "tools/record-session-cost.ps1"
+    "intents" "modules/MODULE_TEMPLATE.md" "tools/brain-doctor.ps1" "tools/context-metrics.ps1" "tools/select-context.ps1" "tools/context-diff.ps1" "tools/handoff-baseline.ps1" "tools/handoff-compact.ps1" "tools/session-checkpoint.ps1" "tools/slice-file.ps1" "tools/dependency-boundary.ps1" "tools/error-fingerprint.ps1" "tools/record-session-cost.ps1"
     "daily/TEMPLATE.md" "sessions/CHECKPOINT.md" "decisions/ADR-TEMPLATE.md"
   )
   for path in "${FRAMEWORK_PATHS[@]}"; do
@@ -50,6 +50,15 @@ if [ -d "$TARGET" ]; then
       mkdir -p "$(dirname "$dest")"
       cp -f "$src" "$dest"
       echo "  updated: $path"
+    fi
+  done
+  for path in "fixes/ERROR_FINGERPRINTS.md"; do
+    src="$TMP_DIR/_brain/$path"
+    dest="$TARGET/$path"
+    if [ -e "$src" ] && [ ! -e "$dest" ]; then
+      mkdir -p "$(dirname "$dest")"
+      cp -f "$src" "$dest"
+      echo "  created: $path"
     fi
   done
 else
