@@ -26,8 +26,6 @@ git clone --depth 1 "$REPO" "$TMP_DIR" >/dev/null 2>&1
 # Framework-only paths — safe to overwrite. Project data (memory/, progress/, decisions/,
 # fixes/fix_log.md, etc.) is deliberately excluded. See update_rules.md.
 FRAMEWORK_PATHS=(
-  "claude.md"
-  "aibrain.md"
   "INDEX.md"
   "overview"
   "prompts"

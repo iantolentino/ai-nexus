@@ -11,6 +11,5 @@ For normal AI Nexus work, start with `BRAIN_INDEX.md` and the context selector. 
 | Legacy architecture | `memory/system_architecture.md` |
 | Code-review policy | `governance/code_review_rules.md` |
 | Commands or canonical snippets | `quick-ref/` |
-| Legacy four-state workflow | `claude.md` |
 
 Do not use this file as a reason to scan legacy folders. Load only the exact mapped source needed.

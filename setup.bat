@@ -33,7 +33,7 @@ if errorlevel 1 (
 if exist "%TARGET%" (
     echo _brain already exists - updating framework files only ^(project data untouched^).
 
-    for %%F in (claude.md aibrain.md INDEX.md AI_BRAIN.md BRAIN_INDEX.md BRAIN_CHANGELOG.md CONTINUE_PROMPT.md) do (
+    for %%F in (INDEX.md AI_BRAIN.md BRAIN_INDEX.md BRAIN_CHANGELOG.md CONTINUE_PROMPT.md) do (
         if exist "%TMP_DIR%\_brain\%%F" (
             copy /y "%TMP_DIR%\_brain\%%F" "%TARGET%\%%F" >nul
             echo   updated: %%F

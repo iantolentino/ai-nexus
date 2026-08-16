@@ -31,7 +31,7 @@ git clone --depth 1 "$REPO" "$TMP_DIR" >/dev/null 2>&1
 if [ -d "$TARGET" ]; then
   echo "_brain/ already exists — updating framework files only (project data untouched)."
   FRAMEWORK_PATHS=(
-    "claude.md" "aibrain.md" "INDEX.md" "overview" "prompts" "governance" "interaction"
+    "INDEX.md" "overview" "prompts" "governance" "interaction"
     "tasks/task_rules.md" "tasks/task_templates.md" "templates"
     "fixes/README.md" "fixes/_template.md" "quick-ref/README.md"
     "AI_BRAIN.md" "BRAIN_INDEX.md" "BRAIN_CHANGELOG.md" "CONTINUE_PROMPT.md"
