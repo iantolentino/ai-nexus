@@ -1,26 +1,9 @@
 # CONTINUE PROMPT
 
-Paste this at the start of a session to resume work on an existing project.
+Use `_brain/CONTINUE_PROMPT.md`. Determine the intent, then run:
 
----
+```powershell
+pwsh -NoProfile -File _brain/tools/select-context.ps1 -Intent <feature-development|bug-fix|refactor|investigation>
+```
 
-Read the following files in this exact order. Do not read anything else.
-
-1. `_brain/claude.md` (or `_brain/aibrain.md`)
-2. `_brain/progress/progress.md`
-3. `_brain/summaries/current_state.md`
-
-You are now in EXECUTION_MODE.
-
-Rules:
-- Select ONE incomplete task from progress.md
-- Validate that all its dependencies are COMPLETE
-- If a dependency is not complete, select that dependency instead
-- If the task is a bug fix (`B###`), read `_brain/fixes/fix_log.md` first
-- Execute the selected task to full completion
-- Update `progress/progress.md` and `summaries/current_state.md` (and `fixes/fix_log.md` if this
-  was a bug fix)
-- Stop
-
-Do not plan. Do not re-explain the system. Do not propose future tasks.
-Execute the next task and stop.
+Read only the selected files. Load a legacy progress, fix, decision, or architecture file only when the selection identifies an exact missing fact. Update today's daily log and `CURRENT_STATE.md` when active state changes; write `sessions/LATEST_HANDOFF.md` before stopping.

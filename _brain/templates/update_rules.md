@@ -19,6 +19,9 @@ These are identical across every AI Nexus install and contain no project-specifi
 - `overview/system_summary.md`
 - `fixes/README.md`, `fixes/_template.md`
 - `quick-ref/README.md`
+- `AI_BRAIN.md`, `BRAIN_INDEX.md`, `BRAIN_CHANGELOG.md`, `CONTINUE_PROMPT.md`
+- `intents/*`, `tools/brain-doctor.ps1`, `tools/context-metrics.ps1`, `tools/select-context.ps1`
+- `daily/TEMPLATE.md`, `sessions/CHECKPOINT.md`, `decisions/ADR-TEMPLATE.md`
 - All folder-level `README.md` files
 
 ## Files That Must NEVER Be Overwritten (project data)
@@ -38,6 +41,8 @@ These hold this specific project's real state — overwriting them destroys work
 - `improvements/improvement_log.md`
 - `tools/tool_inventory.md`
 - `db_backup/backup_policy.md`
+- `CURRENT_STATE.md`, `CONTEXT_DIFF.md`, `daily/YYYY-MM-DD.md`
+- `sessions/LATEST_HANDOFF.md`, `sessions/manifests/*`, `architecture/*`
 
 ## Update Procedure
 1. Diff incoming framework files against existing ones

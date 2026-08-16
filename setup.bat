@@ -33,14 +33,14 @@ if errorlevel 1 (
 if exist "%TARGET%" (
     echo _brain already exists - updating framework files only ^(project data untouched^).
 
-    for %%F in (claude.md aibrain.md INDEX.md) do (
+    for %%F in (claude.md aibrain.md INDEX.md AI_BRAIN.md BRAIN_INDEX.md BRAIN_CHANGELOG.md CONTINUE_PROMPT.md) do (
         if exist "%TMP_DIR%\_brain\%%F" (
             copy /y "%TMP_DIR%\_brain\%%F" "%TARGET%\%%F" >nul
             echo   updated: %%F
         )
     )
 
-    for %%D in (overview prompts governance interaction templates) do (
+    for %%D in (overview prompts governance interaction templates intents) do (
         if exist "%TMP_DIR%\_brain\%%D" (
             xcopy "%TMP_DIR%\_brain\%%D" "%TARGET%\%%D\" /E /I /H /Y >nul
             echo   updated: %%D\
@@ -65,6 +65,14 @@ if exist "%TARGET%" (
         if not exist "%TARGET%\quick-ref" mkdir "%TARGET%\quick-ref"
         copy /y "%TMP_DIR%\_brain\quick-ref\README.md" "%TARGET%\quick-ref\README.md" >nul
         echo   updated: quick-ref\README.md
+    )
+
+    for %%F in (tools\brain-doctor.ps1 tools\context-metrics.ps1 tools\select-context.ps1 daily\TEMPLATE.md sessions\CHECKPOINT.md decisions\ADR-TEMPLATE.md) do (
+        if exist "%TMP_DIR%\_brain\%%F" (
+            for %%P in ("%TARGET%\%%F") do if not exist "%%~dpP" mkdir "%%~dpP"
+            copy /y "%TMP_DIR%\_brain\%%F" "%TARGET%\%%F" >nul
+            echo   updated: %%F
+        )
     )
 ) else (
     echo Installing fresh _brain ...

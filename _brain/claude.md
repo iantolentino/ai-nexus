@@ -1,6 +1,8 @@
 # AI OPERATING SYSTEM — BRAIN CONTROLLER
 
-**ENTRY POINT:** `_brain/claude.md` (single source of truth)
+> **AI Nexus v2 policy:** `AI_BRAIN.md` and `BRAIN_INDEX.md` define context selection. Start with the minimal packet chosen by `tools/select-context.ps1`; do not read this legacy controller in full unless a project explicitly uses the four-state workflow below.
+
+**ENTRY POINT:** `_brain/claude.md` (legacy controller)
 **ALIAS:** `_brain/aibrain.md` (same file, different name)
 **MANDATORY FIRST READ:** Before touching README, source code, or anything else — this file controls ALL AI behavior
 
