@@ -25,6 +25,8 @@ Use `tools/select-context.ps1` to generate an auditable context plan and session
 
 ## Session continuity
 
-At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` if project state changed. Before pausing, run `tools/handoff-baseline.ps1` and update `sessions/LATEST_HANDOFF.md` with a compact, actionable handoff. At continuation, run `tools/context-diff.ps1` when a baseline exists. Archive superseded handoffs in `sessions/archive/`.
+At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` if project state changed. Before pausing, write a compact, actionable `sessions/LATEST_HANDOFF.md`, then run `tools/handoff-baseline.ps1 -UpdateHandoff`. At continuation, run `tools/context-diff.ps1` when a valid baseline exists, before selecting task context. Archive superseded handoffs in `sessions/archive/`.
+
+About every hour, or before a broad context expansion, run `tools/session-checkpoint.ps1`. If it reports YELLOW or RED, offer a concise choice to continue, compact context, generate a handoff, or start a fresh session. It is a reminder, never a forced rotation.
 
 Run `tools/brain-doctor.ps1` periodically to detect stale, oversized, contradictory, or broken active knowledge.
