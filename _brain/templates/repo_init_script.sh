@@ -42,6 +42,8 @@ FRAMEWORK_PATHS=(
   "tools/brain-doctor.ps1"
   "tools/context-metrics.ps1"
   "tools/select-context.ps1"
+  "tools/context-diff.ps1"
+  "tools/handoff-baseline.ps1"
   "daily/TEMPLATE.md"
   "sessions/CHECKPOINT.md"
   "decisions/ADR-TEMPLATE.md"

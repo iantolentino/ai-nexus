@@ -10,6 +10,8 @@ Start with:
 4. `sessions/LATEST_HANDOFF.md`
 5. Today's daily progress log, when relevant
 
+If `LATEST_HANDOFF.md` includes a Git baseline, run `tools/context-diff.ps1` before selecting supporting context. Read the resulting `CONTEXT_DIFF.md` only when it contains a current diff.
+
 Identify the intent and use its profile in `intents/`. Load only the minimum supporting files required to complete the task correctly. If information is missing, identify the exact missing fact and load the mapped source at the next context level; do not load unrelated files.
 
-At meaningful milestones, update today's daily log and `CURRENT_STATE.md` when state changes. Before stopping, write a compact handoff. Never claim an exact token budget unless the provider reliably exposes it.
+At meaningful milestones, update today's daily log and `CURRENT_STATE.md` when state changes. Before stopping, run `tools/handoff-baseline.ps1` and add its output to a compact handoff. Never claim an exact token budget unless the provider reliably exposes it.

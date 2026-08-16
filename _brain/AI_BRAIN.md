@@ -25,6 +25,6 @@ Use `tools/select-context.ps1` to generate an auditable context plan and session
 
 ## Session continuity
 
-At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` if project state changed. Before pausing, update `sessions/LATEST_HANDOFF.md` with a compact, actionable handoff. Archive superseded handoffs in `sessions/archive/`.
+At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` if project state changed. Before pausing, run `tools/handoff-baseline.ps1` and update `sessions/LATEST_HANDOFF.md` with a compact, actionable handoff. At continuation, run `tools/context-diff.ps1` when a baseline exists. Archive superseded handoffs in `sessions/archive/`.
 
 Run `tools/brain-doctor.ps1` periodically to detect stale, oversized, contradictory, or broken active knowledge.

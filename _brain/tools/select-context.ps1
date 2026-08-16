@@ -29,6 +29,8 @@ $baseline = if ($Intent -eq 'framework-maintenance') {
 $baseline | ForEach-Object { Add-ContextFile $_ }
 $today = Join-Path $brainRoot ('daily/' + (Get-Date -Format 'yyyy-MM-dd') + '.md')
 if (Test-Path $today -PathType Leaf) { Add-ContextFile $today }
+$contextDiff = Join-Path $brainRoot 'CONTEXT_DIFF.md'
+if ((Test-Path $contextDiff -PathType Leaf) -and ((Get-Content $contextDiff -Raw) -match '(?m)^- Current commit: [0-9a-f]{7,64}$')) { Add-ContextFile $contextDiff }
 if ($ErrorContext) { Add-ContextFile $ErrorContext }
 $Files | ForEach-Object { Add-ContextFile $_ }
 
