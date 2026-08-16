@@ -82,7 +82,7 @@ Run the selector manually when desired:
 pwsh -NoProfile -File _brain/tools/select-context.ps1 -Intent bug-fix -Files src/auth/login.ts -ErrorContext logs/login-error.txt
 ```
 
-It reports the selected files, line and character totals, deliberately skipped knowledge, and can save a session manifest. Use `-NoManifest` for a read-only preview.
+It reports the selected files, line and character totals, deliberately skipped knowledge, and can save a session manifest. Its default 30,000-character budget warns when a packet is becoming too large; it does not block required work. When it reports `OVER BUDGET`, narrow the source files or load them incrementally. Use `-MaxCharacters` to set a project-specific guard and `-NoManifest` for a read-only preview.
 
 ## Token-efficiency effect
 
@@ -135,6 +135,14 @@ Check session health manually when desired:
 ```powershell
 pwsh -NoProfile -File _brain/tools/session-checkpoint.ps1
 ```
+
+Create a safe, reviewable compact-handoff draft when a handoff has become long:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/handoff-compact.ps1
+```
+
+The compactor never replaces `LATEST_HANDOFF.md` itself. An AI or developer reviews the draft before replacing any project knowledge, so token efficiency never silently discards important decisions.
 
 At the next session, generate a diff from that baseline:
 

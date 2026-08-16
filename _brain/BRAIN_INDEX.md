@@ -13,9 +13,11 @@ Use this index as Question -> Knowledge Needed -> File. Do not search the whole 
 | How should I review this change? | Code-review context | `intents/code-review.md` |
 | How should I maintain AI Nexus itself? | Framework-maintenance context | `intents/framework-maintenance.md` |
 | What is the recommended minimum context? | Context selector | `tools/select-context.ps1` |
+| Is the selected context too large? | Context budget guard | `tools/select-context.ps1 -MaxCharacters ...` |
 | What did this session load and skip? | Context manifest | `sessions/manifests/context-*.md` |
 | What changed since the last handoff? | Git context diff | `tools/context-diff.ps1` and `CONTEXT_DIFF.md` |
 | What Git state belongs in a handoff? | Handoff baseline | `tools/handoff-baseline.ps1` |
+| How can I shorten a long handoff safely? | Reviewable compact-handoff draft | `tools/handoff-compact.ps1` |
 | Is this session becoming too long or broad? | Session-health checkpoint | `tools/session-checkpoint.ps1` |
 | How should deployment work? | Operations rules | `deployment/` |
 | What was true in the past? | Historical context | `archive/`, legacy folders, or archived handoffs |

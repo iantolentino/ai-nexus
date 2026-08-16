@@ -21,11 +21,11 @@ Start every session with `BRAIN_INDEX.md`, `CURRENT_STATE.md`, and `sessions/LAT
 
 Determine the intent, use its profile in `intents/`, and load only the named supporting sources. Expand one level at a time and state the exact missing knowledge before doing so.
 
-Use `tools/select-context.ps1` to generate an auditable context plan and session manifest when PowerShell is available.
+Use `tools/select-context.ps1` to generate an auditable context plan and session manifest when PowerShell is available. Its 30,000-character default budget is a guard, not a hard limit: if it reports OVER BUDGET, narrow the task files or load them incrementally before reading the whole packet.
 
 ## Session continuity
 
-At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` if project state changed. Before pausing, write a compact, actionable `sessions/LATEST_HANDOFF.md`, then run `tools/handoff-baseline.ps1 -UpdateHandoff`. At continuation, run `tools/context-diff.ps1` when a valid baseline exists, before selecting task context. Archive superseded handoffs in `sessions/archive/`.
+At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` if project state changed. Keep the handoff compact; if it has become long, run `tools/handoff-compact.ps1` and review its draft before replacing any handoff content. Before pausing, write a compact, actionable `sessions/LATEST_HANDOFF.md`, then run `tools/handoff-baseline.ps1 -UpdateHandoff`. At continuation, run `tools/context-diff.ps1` when a valid baseline exists, before selecting task context. Archive superseded handoffs in `sessions/archive/`.
 
 About every hour, or before a broad context expansion, run `tools/session-checkpoint.ps1`. If it reports YELLOW or RED, offer a concise choice to continue, compact context, generate a handoff, or start a fresh session. It is a reminder, never a forced rotation.
 

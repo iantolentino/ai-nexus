@@ -4,6 +4,7 @@ param(
     [string]$Intent,
     [string[]]$Files = @(),
     [string]$ErrorContext,
+    [int]$MaxCharacters = 30000,
     [switch]$NoManifest
 )
 
@@ -41,11 +42,16 @@ $rows = foreach ($item in $selected) {
 
 $totalLines = ($rows | Measure-Object -Property Lines -Sum).Sum
 $totalCharacters = ($rows | Measure-Object -Property Characters -Sum).Sum
+$budgetStatus = if ($totalCharacters -gt $MaxCharacters) { 'OVER BUDGET' } else { 'Within budget' }
 $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss K'
 $level = if ($Files.Count -gt 0 -or $ErrorContext) { '2 - Current Work' } else { '1 - Minimal' }
 $output = @('# Context Selection', '', "- Generated: $timestamp", "- Intent: $Intent", "- Context level: $level", '', '## Load', '', '| File | Lines | Characters |', '| --- | ---: | ---: |')
 $output += $rows | ForEach-Object { "| ``$($_.File)`` | $($_.Lines) | $($_.Characters) |" }
-$output += @('', "Total: $($rows.Count) files, $totalLines lines, $totalCharacters characters.", '', '## Deliberately skipped', '')
+$output += @('', "Total: $($rows.Count) files, $totalLines lines, $totalCharacters characters.", "Context budget: $budgetStatus ($totalCharacters / $MaxCharacters characters).")
+if ($totalCharacters -gt $MaxCharacters) {
+    $output += @('Recommendation: narrow the source files or load them incrementally before reading this entire packet.')
+}
+$output += @('', '## Deliberately skipped', '')
 $output += $skipped | ForEach-Object { "- $_" }
 $output += @('', '## Expansion rule', '', 'Load a mapped architecture record, ADR, contract, or historical file only after identifying the exact missing information.')
 
