@@ -74,6 +74,28 @@ pwsh -NoProfile -File _brain/tools/select-context.ps1 -Intent bug-fix -Files src
 
 It reports the selected files, line and character totals, deliberately skipped knowledge, and can save a session manifest. Use `-NoManifest` for a read-only preview.
 
+## Token-efficiency effect
+
+AI Nexus saves context by controlling **what enters a session**, rather than claiming a provider-specific token quota.
+
+| Without controlled context | With AI Nexus |
+| --- | --- |
+| Read a large controller, old progress, history, and unrelated folders | Read the universal controller, current state, latest handoff, intent profile, and only task-relevant files |
+| Re-send unchanged project history each session | Carry forward a compact current state and handoff |
+| Search broadly for a fact | Use `BRAIN_INDEX.md` to load its named source |
+| Re-read old debugging attempts | Consult a compact fix index only when the symptom may match |
+| Load every architecture note or daily log | Expand one context level only after identifying a specific missing fact |
+
+For example, the selector's minimal code-review packet currently contains five framework files and reports its exact line and character totals. It deliberately skips unrelated daily logs, archived handoffs, legacy progress, unrelated architecture notes, and unrelated deployment history. Relevant source code, a diff, and an error log are added only for the task at hand.
+
+This does **not** guarantee an exact number of tokens or a fixed subscription duration: providers count context differently and source files vary in size. AI Nexus measures deterministic proxies—files, lines, and characters—so you can see and reduce unnecessary context regardless of provider.
+
+Run the metrics command to inspect the current brain size:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/context-metrics.ps1
+```
+
 ## Brain layout
 
 ```text
