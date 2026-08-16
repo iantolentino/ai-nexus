@@ -9,7 +9,6 @@
 ## Files Safe to Overwrite (framework files — no project data)
 These are identical across every AI Nexus install and contain no project-specific content:
 
-- `claude.md`, `aibrain.md`
 - `prompts/*`
 - `governance/*`
 - `interaction/*`

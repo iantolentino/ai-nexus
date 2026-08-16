@@ -90,6 +90,18 @@ For example, the selector's minimal code-review packet currently contains five f
 
 This does **not** guarantee an exact number of tokens or a fixed subscription duration: providers count context differently and source files vary in size. AI Nexus measures deterministic proxies—files, lines, and characters—so you can see and reduce unnecessary context regardless of provider.
 
+### Reference estimate
+
+Using the framework's baseline context at the time of this release:
+
+| Session setup | Context supplied before task-specific source files | Approximate size |
+| --- | --- | --- |
+| Old full-controller approach | One large controller alone | 20,671 characters, roughly 5,200 tokens* |
+| AI Nexus minimal approach | Five selected baseline files | 4,949 characters, roughly 1,250 tokens* |
+| Estimated reduction | Before task source files are added | About 76% less instruction context |
+
+\*Rough estimate using approximately four characters per token for English text. Code, languages, and AI providers vary, so use the selector and metrics command for the actual file/line/character totals in a project.
+
 Run the metrics command to inspect the current brain size:
 
 ```powershell
@@ -127,10 +139,6 @@ pwsh -NoProfile -File _brain/tools/context-metrics.ps1
 ```
 
 Brain Doctor checks active knowledge quality. Context Metrics reports deterministic file, line, and character totals without relying on provider-specific token accounting.
-
-## Legacy controller
-
-`_brain/claude.md` is preserved for projects that intentionally use the original four-state controller. It is not the default or required entry point for provider-neutral AI Nexus usage.
 
 ## License
 

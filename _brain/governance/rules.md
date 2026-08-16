@@ -8,8 +8,6 @@
 4. `BRAIN_INDEX.md` — maps questions to authoritative sources
 5. Legacy files — supporting or historical knowledge only
 
-`claude.md` governs only a project that explicitly adopts its legacy four-state workflow. It does not override the provider-neutral policy.
-
 ## Universal constraints
 
 - Do not scan the repository or full brain by default.
@@ -17,7 +15,3 @@
 - Preserve confirmed decisions; record significant changes with evidence.
 - For a bug fix, check `fixes/fix_log.md` only when the bug-fix context selection indicates it is relevant.
 - Update active state and handoff at meaningful milestones.
-
-## Legacy workflow
-
-The state-machine rules in `claude.md` remain for compatibility. Use them only when a project explicitly selects that workflow.

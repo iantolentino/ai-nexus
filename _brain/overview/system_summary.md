@@ -13,4 +13,4 @@ AI Nexus is a provider-neutral context-management framework for AI-assisted deve
 | Provider adapters | Root `AGENTS.md`, `CLAUDE.md`, Cursor/Windsurf/Copilot rules | Direct each tool to the same controller |
 | Maintenance | Brain Doctor and Context Metrics | Detects stale/broken active knowledge and measures size |
 
-Legacy folders and `claude.md` remain compatible supporting knowledge. They are never the default context for provider-neutral AI Nexus sessions.
+Legacy project folders remain on-demand supporting knowledge. They are never default context for provider-neutral AI Nexus sessions.

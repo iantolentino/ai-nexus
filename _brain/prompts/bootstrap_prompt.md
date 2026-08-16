@@ -4,7 +4,7 @@ Paste this at the start of a new AI session to initialize a new project with AI 
 
 ---
 
-Read `_brain/AI_BRAIN.md` and `_brain/BRAIN_INDEX.md` in full. Read `_brain/claude.md` only when the project explicitly adopts the legacy four-state workflow.
+Read `_brain/AI_BRAIN.md` and `_brain/BRAIN_INDEX.md` in full.
 
 You are initializing an AI Nexus project.
 
