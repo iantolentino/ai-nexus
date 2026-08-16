@@ -2,6 +2,8 @@
 
 AI Nexus is a context-management framework for AI-assisted development. Its goal is controlled context with reliable continuity: load the smallest useful knowledge set, then expand only when a task proves it necessary.
 
+Keep AI Nexus retrieval-focused. Do not add giant permanent prompts, autonomous agent layers, or background context loading. Tools must propose or validate a minimal packet, not cause broad repository reads.
+
 This file is the single universal controller for AI Nexus. Provider-specific files such as `AGENTS.md` and `CLAUDE.md` are only small adapters that direct their AI tool here.
 
 ## Authority
@@ -22,6 +24,8 @@ Start every session with `BRAIN_INDEX.md`, `CURRENT_STATE.md`, and `sessions/LAT
 Determine the intent, use its profile in `intents/`, and load only the named supporting sources. Expand one level at a time and state the exact missing knowledge before doing so.
 
 When a task names a module, load only its profile in `modules/` plus direct dependencies. For a large source file, use `tools/slice-file.ps1` with a bounded line range instead of reading the whole file. `tools/dependency-boundary.ps1` lists direct local dependency candidates without loading them. Use `tools/error-fingerprint.ps1` for a recurring error before searching broad history.
+
+Route specialized instructions with `tools/skill-router.ps1`. Use `tools/workflow-gate.ps1` for DISCOVER → PLAN → IMPLEMENT → TEST → REVIEW → COMPLETE; it blocks a completion claim unless checks, review, and state/handoff update are recorded.
 
 Use `tools/select-context.ps1` to generate an auditable context plan and session manifest when PowerShell is available. Its 30,000-character default budget is a guard, not a hard limit: if it reports OVER BUDGET, narrow the task files or load them incrementally before reading the whole packet.
 

@@ -10,6 +10,8 @@ Use this index as Question -> Knowledge Needed -> File. Do not search the whole 
 | Why was a technical choice made? | Decision record | `decisions/ADR-*.md` |
 | How is the system designed? | Architecture | `architecture/ARCHITECTURE.md` |
 | Which context fits this task? | Intent profile | `intents/<intent>.md` |
+| Which specialized instructions fit this task? | Skill route | `tools/skill-router.ps1` |
+| Where is this task in execution? | Workflow gate | `tools/workflow-gate.ps1` |
 | Which module owns this task? | Module scope and direct dependencies | `modules/<module>.md` |
 | How should I review this change? | Code-review context | `intents/code-review.md` |
 | How should I maintain AI Nexus itself? | Framework-maintenance context | `intents/framework-maintenance.md` |
@@ -21,6 +23,10 @@ Use this index as Question -> Knowledge Needed -> File. Do not search the whole 
 | What directly depends on this source file? | Dependency boundary | `tools/dependency-boundary.ps1` |
 | Is this error already known? | Stable error fingerprint | `tools/error-fingerprint.ps1` and `fixes/ERROR_FINGERPRINTS.md` |
 | How much context did sessions use over time? | Session cost history | `tools/record-session-cost.ps1` |
+| What are direct module relationships? | Module graph | `tools/module-graph.ps1` |
+| Which knowledge is stale? | Context decay report | `tools/context-decay.ps1` |
+| Is knowledge confirmed or contradictory? | Confidence/conflict audit | `tools/knowledge-audit.ps1` |
+| How can I use short CLI commands? | Cross-platform PowerShell CLI | `tools/nexus.ps1` |
 | What changed since the last handoff? | Git context diff | `tools/context-diff.ps1` and `CONTEXT_DIFF.md` |
 | What Git state belongs in a handoff? | Handoff baseline | `tools/handoff-baseline.ps1` |
 | How can I shorten a long handoff safely? | Reviewable compact-handoff draft | `tools/handoff-compact.ps1` |

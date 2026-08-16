@@ -103,6 +103,12 @@ pwsh -NoProfile -File _brain/tools/error-fingerprint.ps1 -ErrorFile logs/login-e
 
 AI Nexus saves context by controlling **what enters a session**, rather than claiming a provider-specific token quota.
 
+## Advanced retrieval and quality controls
+
+AI Nexus now includes opt-in skill routing, task/Git/module-aware context ranking, direct dependency and module graphs, bounded large-file slices, error fingerprints, and a “Why loaded” report. Context decay, confidence/conflict audits, and Brain Doctor suggestions identify knowledge for review rather than automatically trusting, moving, or deleting it.
+
+Use the workflow gate for `DISCOVER → PLAN → IMPLEMENT → TEST → REVIEW → COMPLETE`; completion requires recorded checks, review, and state/handoff updates. `tools/nexus.ps1` provides a PowerShell Core CLI that works on Windows, macOS, and Linux: `pwsh -NoProfile -File _brain/tools/nexus.ps1 doctor`. Provider token estimates are optional rough estimates; the framework keeps files, lines, and characters as its provider-neutral metrics.
+
 | Without controlled context | With AI Nexus |
 | --- | --- |
 | Read a large controller, old progress, history, and unrelated folders | Read the universal controller, current state, latest handoff, intent profile, and only task-relevant files |
