@@ -9,7 +9,7 @@
 #   See _brain/templates/update_rules.md for the exact split.
 # - Also drops root-level pointer files (CLAUDE.md, AGENTS.md, .cursorrules, .windsurfrules,
 #   .github/copilot-instructions.md) so any AI tool auto-loads instructions to read
-#   _brain/claude.md first — only where none already exists.
+#   _brain/AI_BRAIN.md first — only where none already exists.
 
 $Repo = "https://github.com/iantolentino/ai-nexus.git"
 $Target = "_brain"
@@ -77,7 +77,7 @@ try {
         $srcName = $EntrySrcNames[$i]
         $destPath = $EntryDestPaths[$i]
         if (Test-Path $destPath) {
-            Write-Host "  skipped $destPath (already exists) - add the AI Nexus minimal-context policy manually."
+            Write-Host "  skipped $destPath (already exists) - merge the AI Nexus universal-controller policy manually."
         } else {
             $destDir = Split-Path $destPath -Parent
             if ($destDir -and -not (Test-Path $destDir)) {

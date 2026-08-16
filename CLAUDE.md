@@ -1,9 +1,5 @@
-# READ THIS FIRST
+# AI Nexus framework repository
 
-This repository IS the AI Nexus framework source — not a project that uses it.
+`_brain/AI_BRAIN.md` is the universal controller for this repository. Before changing the framework, read it, determine the task intent, and use `_brain/tools/select-context.ps1` to select only necessary context.
 
-Before making any change here, read `_brain/claude.md` in full, then also read `README.md` for
-context on how this framework is distributed (`install.sh`, `install.ps1`, `setup.bat`).
-
-Treat `_brain/` here as the template that gets copied into other people's projects — changes here
-affect every future install, not just this repo.
+This repository distributes the `_brain/` template to other projects. Preserve compatibility files unless the user explicitly authorizes their removal; changes here affect future installs.

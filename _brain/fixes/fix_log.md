@@ -1,7 +1,6 @@
 # FIX LOG
 
-> Read this file FIRST before debugging anything. It is the entire memory of every bug this
-> repo has already solved. Most entries should need nothing more than this table.
+> Read this file when the bug-fix context selection or symptom suggests a prior issue may match. It is the compact memory of solved bugs; most entries should need nothing more than this table.
 
 ---
 

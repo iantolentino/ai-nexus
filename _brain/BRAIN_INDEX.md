@@ -10,6 +10,7 @@ Use this index as Question -> Knowledge Needed -> File. Do not search the whole 
 | Why was a technical choice made? | Decision record | `decisions/ADR-*.md` |
 | How is the system designed? | Architecture | `architecture/ARCHITECTURE.md` |
 | Which context fits this task? | Intent profile | `intents/<intent>.md` |
+| How should I review this change? | Code-review context | `intents/code-review.md` |
 | What is the recommended minimum context? | Context selector | `tools/select-context.ps1` |
 | What did this session load and skip? | Context manifest | `sessions/manifests/context-*.md` |
 | How should deployment work? | Operations rules | `deployment/` |

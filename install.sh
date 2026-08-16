@@ -10,7 +10,7 @@
 #   See _brain/templates/update_rules.md for the exact split.
 # - Also drops root-level pointer files (CLAUDE.md, AGENTS.md, .cursorrules, .windsurfrules,
 #   .github/copilot-instructions.md) so any AI tool auto-loads instructions to read
-#   _brain/claude.md first — only where none already exists.
+#   _brain/AI_BRAIN.md first — only where none already exists.
 
 set -euo pipefail
 
@@ -67,7 +67,7 @@ for i in "${!ENTRY_SRC_NAMES[@]}"; do
   src_name="${ENTRY_SRC_NAMES[$i]}"
   dest_path="${ENTRY_DEST_PATHS[$i]}"
   if [ -f "$dest_path" ]; then
-    echo "  skipped $dest_path (already exists) — add this line manually: \"Read _brain/claude.md in full before doing anything else.\""
+    echo "  skipped $dest_path (already exists) — merge the AI Nexus universal-controller policy manually."
   else
     mkdir -p "$(dirname "$dest_path")"
     cp "$ENTRY_SRC_DIR/$src_name" "$dest_path"

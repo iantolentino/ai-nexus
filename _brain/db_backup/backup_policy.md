@@ -1,31 +1,30 @@
-# DATABASE BACKUP POLICY
+# Database Backup Policy
 
-> OPTIONAL MODULE — only generate/fill this in if the project has a database.
-> See `claude.md` § OPTIONAL MODULE RULE.
+> Optional module. Load only for database, backup, or restore work.
 
----
+## Backup strategy
 
-## Backup Strategy
-[Automated snapshot / logical dump (pg_dump, mysqldump) / managed provider backup (RDS, PlanetScale, etc.)]
+[Automated snapshot / logical dump / managed provider backup]
 
 ## Schedule
+
 | Environment | Frequency | Retention |
-|-------------|-----------|-----------|
-| Production  |           |           |
-| Staging     |           |           |
+| --- | --- | --- |
+| Production | | |
+| Staging | | |
 
-## Storage Location
-[Where backups live — S3 bucket, provider-managed, local encrypted volume, etc.]
+## Storage location
 
-## Restore Procedure
-1. [Step 1]
-2. [Step 2]
-3. [Verify data integrity post-restore]
+[Encrypted storage location]
 
-## Restore Test Cadence
-[How often a restore is actually tested — untested backups are not a backup strategy]
+## Restore procedure
+
+1. [Step]
+2. [Step]
+3. Verify data integrity.
 
 ## Rules
-- Never store backups unencrypted in a public or shared location
-- Never commit backup files to version control
-- Backup credentials follow `security/secrets_policy.md`
+
+- Never store unencrypted backups in public/shared locations.
+- Never commit backup files or credentials.
+- Follow `security/secrets_policy.md`.
