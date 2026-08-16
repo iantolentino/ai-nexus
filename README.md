@@ -8,6 +8,8 @@ AI Nexus is a provider-neutral context-management framework for AI-assisted soft
 
 AI Nexus keeps active project knowledge compact, preserves durable decisions, and expands context only when a task requires it.
 
+`_brain/AI_BRAIN.md` is the single universal controller. Every provider adapter points to it; `AGENTS.md`, `CLAUDE.md`, and other tool-specific files are not separate sources of truth.
+
 ## Install
 
 Run one installer from a project's root directory:
@@ -42,7 +44,7 @@ No repeated startup prompt is required when the root instruction file exists.
 | Windsurf | `.windsurfrules` |
 | GitHub Copilot | `.github/copilot-instructions.md` |
 
-Those files are deliberately small. They tell the agent to determine task intent, run the context selector, and read only its selected files. They do not tell every agent to load a full brain controller.
+Those files are deliberately small adapters. They direct the agent to the universal controller, `_brain/AI_BRAIN.md`, then to the context selector. They are not separate controllers and never require a full legacy brain read.
 
 For browser ChatGPT, browser Claude, or any tool that cannot read local project files automatically, paste `_brain/CONTINUE_PROMPT.md` into the chat first, then state the task.
 

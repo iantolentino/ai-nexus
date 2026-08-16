@@ -10,6 +10,6 @@ The installers copy one of these small files to a project root only when the des
 | `.windsurfrules` | Windsurf | `.windsurfrules` |
 | `copilot-instructions.md` | GitHub Copilot | `.github/copilot-instructions.md` |
 
-Each template enforces the same provider-neutral policy: identify intent, run AI Nexus context selection, and read only the selected files. They must not require a full read of `_brain/claude.md`.
+Each template points to `_brain/AI_BRAIN.md`, the one universal controller. It then identifies intent, runs AI Nexus context selection, and reads only selected files. Templates must not require a full read of `_brain/claude.md`.
 
 If a project already has an instruction file, the installer leaves it untouched. Merge the AI Nexus context policy into that file manually.

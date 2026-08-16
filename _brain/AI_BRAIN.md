@@ -2,6 +2,8 @@
 
 AI Nexus is a context-management framework for AI-assisted development. Its goal is controlled context with reliable continuity: load the smallest useful knowledge set, then expand only when a task proves it necessary.
 
+This file is the single universal controller for AI Nexus. Provider-specific files such as `AGENTS.md` and `CLAUDE.md` are only small adapters that direct their AI tool here.
+
 ## Authority
 
 - `AI_BRAIN.md` defines the operating policy.
