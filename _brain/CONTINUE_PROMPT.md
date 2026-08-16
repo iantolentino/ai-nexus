@@ -14,4 +14,6 @@ If `LATEST_HANDOFF.md` includes a Git baseline, run `tools/context-diff.ps1` bef
 
 Identify the intent and use its profile in `intents/`. Load only the minimum supporting files required to complete the task correctly. If information is missing, identify the exact missing fact and load the mapped source at the next context level; do not load unrelated files.
 
-At meaningful milestones, update today's daily log and `CURRENT_STATE.md` when state changes. Before stopping, run `tools/handoff-baseline.ps1` and add its output to a compact handoff. Never claim an exact token budget unless the provider reliably exposes it.
+At meaningful milestones, update today's daily log and `CURRENT_STATE.md` when state changes. Before stopping, write a compact handoff, then run `tools/handoff-baseline.ps1 -UpdateHandoff` to record its Git baseline. Never claim an exact token budget unless the provider reliably exposes it.
+
+About every hour, or before broad context expansion, run `tools/session-checkpoint.ps1`. If it reports YELLOW or RED, offer to continue, compact context, generate a handoff, or start a fresh session; never force rotation.

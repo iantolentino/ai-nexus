@@ -38,7 +38,7 @@ Open a supported coding agent from the project root and state the task normally:
 Fix the login redirect loop after sign-in.
 ```
 
-No repeated startup prompt is required when the root instruction file exists.
+No repeated startup prompt is required when the root instruction file exists. In a terminal-based agent that can run PowerShell and follows project instructions, the adapter handles the routine lifecycle: it refreshes the Git context diff when applicable, runs the context selector, and records a Git baseline when the agent creates a handoff.
 
 | Tool | Automatic entry file |
 | --- | --- |
@@ -50,7 +50,13 @@ No repeated startup prompt is required when the root instruction file exists.
 
 Those files are deliberately small adapters. They direct the agent to the universal controller, `_brain/AI_BRAIN.md`, then to the context selector. They are not separate controllers and never require a full legacy brain read.
 
-For browser ChatGPT, browser Claude, or any tool that cannot read local project files automatically, paste `_brain/CONTINUE_PROMPT.md` into the chat first, then state the task.
+For browser ChatGPT, browser Claude, or any tool that cannot read local project files or run scripts, paste `_brain/CONTINUE_PROMPT.md` into the chat first, then state the task.
+
+### Automatic continuity
+
+Once `_brain/` and the matching root adapter are installed, the normal terminal workflow is simply: open the project and state the task. The agent reads the controller, refreshes the Git-only change summary when a handoff baseline exists, selects a minimal context packet, and starts work. When the session pauses, it records a compact handoff and its current Git baseline. A new agent or terminal session starts from that handoff plus the diff, so it does not need to reread old conversations or unchanged files.
+
+About every hour, the agent runs a session-health check based on the current context manifest. It recommends a compact handoff or fresh session only when the session has become long; it never forces the user to stop. This rule depends on an agent being allowed to run the included PowerShell scripts, so it is an instruction-driven reminder rather than an operating-system notification.
 
 To explicitly verify the workflow in any supported agent, use:
 
@@ -118,10 +124,16 @@ pwsh -NoProfile -File _brain/tools/context-metrics.ps1
 
 For terminal agents, AI Nexus can load only what changed since the previous handoff.
 
-Before stopping a session, generate a Git baseline and paste it into `sessions/LATEST_HANDOFF.md`:
+Before stopping a session, the agent writes the compact handoff then updates its Git baseline in place:
 
 ```powershell
-pwsh -NoProfile -File _brain/tools/handoff-baseline.ps1
+pwsh -NoProfile -File _brain/tools/handoff-baseline.ps1 -UpdateHandoff
+```
+
+Check session health manually when desired:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/session-checkpoint.ps1
 ```
 
 At the next session, generate a diff from that baseline:
@@ -159,7 +171,7 @@ Project-specific architecture, decisions, fixes, security, deployment, and relea
 
 ## Session continuity
 
-At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` when the project state changes. Before stopping, update `sessions/LATEST_HANDOFF.md` with the objective, completed work, decisions, blockers, relevant files, next action, and warnings.
+At a meaningful milestone, update today's daily log and `CURRENT_STATE.md` when the project state changes. Before stopping, update `sessions/LATEST_HANDOFF.md` with the objective, completed work, decisions, blockers, relevant files, next action, and warnings; then run `handoff-baseline.ps1 -UpdateHandoff`. On the next task, the agent runs `context-diff.ps1` (when a baseline exists) and the selector before it reads task files.
 
 ## Maintenance
 

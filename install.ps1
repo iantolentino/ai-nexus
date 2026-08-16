@@ -38,7 +38,7 @@ try {
             "overview", "prompts", "governance", "interaction", "templates",
             "fixes/README.md", "fixes/_template.md", "quick-ref/README.md",
             "AI_BRAIN.md", "BRAIN_INDEX.md", "BRAIN_CHANGELOG.md", "CONTINUE_PROMPT.md",
-            "intents", "tools/brain-doctor.ps1", "tools/context-metrics.ps1", "tools/select-context.ps1", "tools/context-diff.ps1", "tools/handoff-baseline.ps1",
+            "intents", "tools/brain-doctor.ps1", "tools/context-metrics.ps1", "tools/select-context.ps1", "tools/context-diff.ps1", "tools/handoff-baseline.ps1", "tools/session-checkpoint.ps1",
             "daily/TEMPLATE.md", "sessions/CHECKPOINT.md", "decisions/ADR-TEMPLATE.md"
         )
         foreach ($path in $FrameworkPaths) {
@@ -89,7 +89,7 @@ try {
 
     Write-Host ""
     Write-Host "Done. _brain/ is ready."
-    Write-Host "Next: paste _brain/prompts/bootstrap_prompt.md into a new AI chat session to start."
+    Write-Host "Next: open a supported terminal agent in this project and state your task normally."
 }
 finally {
     if (Test-Path $TmpDir) {

@@ -6,7 +6,7 @@ When an installer updates an existing `_brain/`, it refreshes framework files bu
 
 - `AI_BRAIN.md`, `BRAIN_INDEX.md`, `BRAIN_CHANGELOG.md`, `CONTINUE_PROMPT.md`
 - `prompts/*`, `governance/*`, `interaction/*`, `intents/*`, `overview/*`, `templates/*`
-- `tools/brain-doctor.ps1`, `tools/context-metrics.ps1`, `tools/select-context.ps1`, `tools/context-diff.ps1`, `tools/handoff-baseline.ps1`
+- `tools/brain-doctor.ps1`, `tools/context-metrics.ps1`, `tools/select-context.ps1`, `tools/context-diff.ps1`, `tools/handoff-baseline.ps1`, `tools/session-checkpoint.ps1`
 - `daily/TEMPLATE.md`, `sessions/CHECKPOINT.md`, `decisions/ADR-TEMPLATE.md`
 - Framework documentation and provider entry-point templates
 
