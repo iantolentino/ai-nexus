@@ -17,7 +17,7 @@ This project uses [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH
 ## Release Checklist
 Before tagging a release:
 
-- [ ] All tasks for this version are COMPLETE in `progress/progress.md`
+- [ ] Current objective and release readiness are verified in `CURRENT_STATE.md`
 - [ ] `releases/changelog.md` is updated with all changes
 - [ ] Version number is bumped in the project config file
 - [ ] Deployment to staging verified and tested

@@ -125,7 +125,7 @@ _brain/
 └── archive/                # Historical knowledge
 ```
 
-Legacy folders such as `progress/`, `memory/`, and `summaries/` remain available for existing projects. They are supporting or historical context unless the index identifies an exact need.
+Project-specific architecture, decisions, fixes, security, deployment, and release notes remain available as supporting knowledge. They are loaded only when the index identifies an exact need.
 
 ## Session continuity
 
