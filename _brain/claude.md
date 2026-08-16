@@ -1,10 +1,11 @@
-# AI OPERATING SYSTEM — BRAIN CONTROLLER
+# Legacy Four-State Controller
 
-> **AI Nexus v2 policy:** `AI_BRAIN.md` and `BRAIN_INDEX.md` define context selection. Start with the minimal packet chosen by `tools/select-context.ps1`; do not read this legacy controller in full unless a project explicitly uses the four-state workflow below.
+> Compatibility only. `AI_BRAIN.md` is the universal controller for normal AI Nexus use. Do not load this file by default and do not treat its internal historical references as current provider-neutral policy.
+>
+> Read this complete file only when a project explicitly chooses the original four-state workflow. Its historic requirements, including its tool-specific skill references, apply only to that legacy workflow.
 
-**ENTRY POINT:** `_brain/claude.md` (legacy controller)
-**ALIAS:** `_brain/aibrain.md` (same file, different name)
-**MANDATORY FIRST READ:** Before touching README, source code, or anything else — this file controls ALL AI behavior
+**Legacy entry point:** `_brain/claude.md`
+**Compatibility alias:** `_brain/aibrain.md`
 
 ---
 

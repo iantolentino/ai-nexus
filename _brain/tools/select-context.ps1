@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('feature-development', 'bug-fix', 'refactor', 'investigation')]
+    [ValidateSet('feature-development', 'bug-fix', 'refactor', 'investigation', 'code-review')]
     [string]$Intent,
     [string[]]$Files = @(),
     [string]$ErrorContext,

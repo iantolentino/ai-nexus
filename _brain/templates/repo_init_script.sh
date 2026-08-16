@@ -39,6 +39,17 @@ FRAMEWORK_PATHS=(
   "fixes/README.md"
   "fixes/_template.md"
   "quick-ref/README.md"
+  "AI_BRAIN.md"
+  "BRAIN_INDEX.md"
+  "BRAIN_CHANGELOG.md"
+  "CONTINUE_PROMPT.md"
+  "intents"
+  "tools/brain-doctor.ps1"
+  "tools/context-metrics.ps1"
+  "tools/select-context.ps1"
+  "daily/TEMPLATE.md"
+  "sessions/CHECKPOINT.md"
+  "decisions/ADR-TEMPLATE.md"
 )
 
 for path in "${FRAMEWORK_PATHS[@]}"; do

@@ -24,10 +24,9 @@ sometimes landing on a worse fix than the one already found. `fixes/` makes fixe
 
 ---
 
-## Rule (enforced by `claude.md`)
+## Rule (enforced by AI Nexus bug-fix context)
 
-- Before starting any bug-fix task (DEBUG_MODE or a `B###` task), scan `fixes/fix_log.md` for a
-  matching or related entry first.
+- Before starting a bug fix, scan `fixes/fix_log.md` only when the bug-fix context selection or the reported symptom indicates a matching prior issue may exist.
 - After completing any bug-fix task, add a row to `fix_log.md`. Add a detail file if the fix is
   non-obvious or likely to recur.
 - Never delete a fix entry — mark it `SUPERSEDED` and link the new one if it's later replaced.

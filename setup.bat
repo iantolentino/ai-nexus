@@ -8,7 +8,7 @@ REM - If _brain\ already exists: updates framework files only, never touches pro
 REM   See _brain\templates\update_rules.md for the exact split.
 REM - Also drops root-level pointer files (CLAUDE.md, AGENTS.md, .cursorrules, .windsurfrules,
 REM   .github\copilot-instructions.md) so any AI tool auto-loads instructions to read
-REM   _brain\claude.md first - only where none already exists.
+REM   _brain\AI_BRAIN.md first - only where none already exists.
 
 setlocal enabledelayedexpansion
 
@@ -100,7 +100,7 @@ exit /b 0
 set SRC_NAME=%~1
 set DEST_PATH=%~2
 if exist "%DEST_PATH%" (
-    echo   skipped %DEST_PATH% ^(already exists^) - add this line manually: "Read _brain/claude.md in full before doing anything else."
+    echo   skipped %DEST_PATH% ^(already exists^) - merge the AI Nexus universal-controller policy manually.
 ) else (
     copy /y "%TMP_DIR%\_brain\templates\entrypoints\%SRC_NAME%" "%DEST_PATH%" >nul
     echo   created: %DEST_PATH%

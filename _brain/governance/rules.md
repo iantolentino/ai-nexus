@@ -1,49 +1,23 @@
-# GOVERNANCE RULES
+# Governance Rules
 
-## Authority Hierarchy
-1. `claude.md` / `aibrain.md` — single source of truth for AI behavior
-2. `memory/app_context.md` — confirmed project specification
-3. `progress/backlog.md` — confirmed task scope
-4. `fixes/fix_log.md` — confirmed prior bug fixes (authoritative for "has this been solved before")
-5. All other `_brain/` files — supporting data
+## Authority
 
-If any conflict exists between files, the higher authority wins.
-If `claude.md` conflicts with any other file, `claude.md` wins — always.
+1. `AI_BRAIN.md` — universal context and session policy
+2. `CURRENT_STATE.md` — current project facts
+3. Relevant ADRs, architecture records, contracts, and task specifications
+4. `BRAIN_INDEX.md` — maps questions to authoritative sources
+5. Legacy files — supporting or historical knowledge only
 
----
+`claude.md` governs only a project that explicitly adopts its legacy four-state workflow. It does not override the provider-neutral policy.
 
-## What the AI May Do Per State
+## Universal constraints
 
-| State                 | May Read                                          | May Write                              | May Generate Code |
-|-----------------------|-----------------------------------------------------|-------------------------------------------|--------------------|
-| BOOTSTRAP_MODE        | claude.md only                                    | nothing                                | no                 |
-| CONFIRMATION_LOCK     | claude.md only                                    | nothing                                | no                 |
-| SYSTEM_GENERATION     | claude.md                                         | all `_brain/` files                    | no                 |
-| EXECUTION_MODE        | progress.md, current_state.md, INDEX.md as needed | task output only                       | yes                |
-| Bug-fix task (`B###`) | + `fixes/fix_log.md` before starting              | + `fixes/fix_log.md` (and detail file) | yes                |
+- Do not scan the repository or full brain by default.
+- Expand context only after identifying the exact missing knowledge.
+- Preserve confirmed decisions; record significant changes with evidence.
+- For a bug fix, check `fixes/fix_log.md` only when the bug-fix context selection indicates it is relevant.
+- Update active state and handoff at meaningful milestones.
 
-`INDEX.md` and `quick-ref/` may be read in any state — they are lookup aids, not planning or
-execution artifacts, and reading them does not count as a "full repository scan."
+## Legacy workflow
 
----
-
-## Change Control
-- Architecture changes → log in `decisions/decision_log.md`
-- Rejected features → log in `decisions/rejected_options.md`
-- Scope additions → update `progress/backlog.md` and `timelines/actual_timeline.md`
-- Scope removals → log reason in `decisions/rejected_options.md`
-- Bug fixes → log in `fixes/fix_log.md` (mandatory, every fix, no exceptions — see `claude.md` §
-  BUG FIX MEMORY LAYER)
-- Non-urgent optimization ideas → log in `improvements/improvement_log.md`, do not act on them
-  without first moving them into `progress/backlog.md`
-
----
-
-## What the AI Must Never Do
-- Scan the full repository without explicit instruction
-- Execute more than one task per session
-- Skip a state in the state machine
-- Overwrite confirmed decisions without user approval
-- Generate implementation code outside EXECUTION_MODE
-- Attempt to fix a bug without first checking `fixes/fix_log.md`
-- Finish a bug-fix task without adding a row to `fixes/fix_log.md`
+The state-machine rules in `claude.md` remain for compatibility. Use them only when a project explicitly selects that workflow.

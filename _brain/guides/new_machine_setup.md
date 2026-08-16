@@ -202,17 +202,7 @@ Check:
 
 # 8. RESUME AI DEVELOPMENT (AI SYSTEM INTEGRATION)
 
-Start AI session and provide:
-
-Load in order:
-1. _brain/claude.md
-2. _brain/summaries/current_state.md
-3. _brain/progress/progress.md
-4. _brain/tasks/task_rules.md
-
-Enter EXECUTION_MODE.
-
-Continue from first incomplete task in progress.md.
+Open the project root in a supported coding agent. Its provider adapter reads `AI_BRAIN.md` and selects minimal task context automatically. For browser chat, paste `_brain/CONTINUE_PROMPT.md`, then state the task.
 
 ---
 
@@ -266,7 +256,7 @@ git push origin main
 | DB connection error | ensure DB service is running |
 | migration fails | verify .env config |
 | port already in use | change port or kill process |
-| AI cannot resume | check _brain/progress/progress.md |
+| AI cannot resume | check `_brain/CURRENT_STATE.md` and `_brain/sessions/LATEST_HANDOFF.md` |
 
 ---
 
@@ -280,6 +270,6 @@ Never:
 - run full rewrites without confirmation
 
 Always:
-- resume via EXECUTION_MODE
-- use progress tracking
+- resume via the context selector and latest handoff
+- use daily logs and compact active state
 - apply incremental changes only
