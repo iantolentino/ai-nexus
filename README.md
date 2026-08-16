@@ -45,20 +45,23 @@ The AI moves through four states in order. No state can be skipped.
 
 ## ⚡ Quick Start (30 seconds)
 
-### The Simplest Flow
+### Automatic start (recommended)
 
-**You already have `_brain/` folder in your project?**
+After installation, open **Codex** or **Claude Code** from the project root and state the task normally:
 
-```bash
-# 1. You're done with setup
-# 2. Open your AI chat (Claude Code, Claude.ai, ChatGPT, etc.)
-# 3. First message:
-
-"Read _brain/claude.md as your brain controller. 
-I'm working on [project description]. What's next?"
+```text
+Fix the login redirect loop after sign-in.
 ```
 
-**That's it.** The AI loads the brain. You work. All rules enforced automatically.
+No startup prompt is required. The installer creates a small root instruction file (`AGENTS.md` for Codex and `CLAUDE.md` for Claude Code) when one does not already exist. It automatically directs the agent to select and read only the minimum AI Nexus context for the task.
+
+For ChatGPT or Claude in a browser, local files are not automatically available. Paste `_brain/CONTINUE_PROMPT.md`, then state the task. To explicitly verify the workflow in any supported agent, use:
+
+```text
+Use AI Nexus for this task. Identify the intent, run the context selector, read only its selected files, then proceed.
+
+Task: [describe the work]
+```
 
 ---
 
