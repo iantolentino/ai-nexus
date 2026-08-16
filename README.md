@@ -94,17 +94,19 @@ For example, the selector's minimal code-review packet currently contains five f
 
 This does **not** guarantee an exact number of tokens or a fixed subscription duration: providers count context differently and source files vary in size. AI Nexus measures deterministic proxies—files, lines, and characters—so you can see and reduce unnecessary context regardless of provider.
 
-### Reference estimate
+### Planning estimates by project stage
 
-Using the framework's baseline context at the time of this release:
+These are context-planning ranges, not provider guarantees. They assume a focused task and exclude the exact source code, diff, or error output needed to do that task.
 
-| Session setup | Context supplied before task-specific source files | Approximate size |
-| --- | --- | --- |
-| Old full-controller approach | One large controller alone | 20,671 characters, roughly 5,200 tokens* |
-| AI Nexus minimal approach | Five selected baseline files | 4,949 characters, roughly 1,250 tokens* |
-| Estimated reduction | Before task source files are added | About 76% less instruction context |
+| Project stage | Uncontrolled session context | AI Nexus selected context | Estimated reduction | Why it improves |
+| --- | ---: | ---: | ---: | --- |
+| MVP / early project | 8k–25k tokens | 1.5k–5k tokens | 60–85% | Avoids repeated specs, old discussion, and unrelated files |
+| Growing project | 15k–50k tokens | 2k–8k tokens | 70–85% | Uses compact state/handoff instead of accumulating progress history |
+| Production / multi-module project | 25k–100k+ tokens | 3k–12k tokens | 70–95% | Loads only the affected module, relevant decision/contract, and Git diff |
 
-\*Rough estimate using approximately four characters per token for English text. Code, languages, and AI providers vary, so use the selector and metrics command for the actual file/line/character totals in a project.
+At the framework baseline, the minimal five-file packet is about 4,949 characters (roughly 1,250 tokens*) compared with the removed full-controller approach at about 20,671 characters (roughly 5,200 tokens*): about 76% less instruction context before task-specific source files are added.
+
+\*Rough estimate using approximately four characters per token for English text. Code, languages, source-file size, and AI providers vary. Use the selector and metrics command for actual file, line, and character totals in a project.
 
 Run the metrics command to inspect the current brain size:
 
