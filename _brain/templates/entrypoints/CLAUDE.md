@@ -1,10 +1,8 @@
-# READ THIS FIRST
+# AI Nexus context policy
 
-Before doing anything else in this repository — before scanning files, before answering questions,
-before writing code — read `_brain/claude.md` (or `_brain/aibrain.md`) in full.
+Before work, determine the task intent and run `_brain/tools/select-context.ps1` for that intent.
+Read only the files in its Context Selection. Do not scan the repository, read the full brain, or
+load legacy progress/history unless the selected context identifies an exact missing fact.
 
-That file is the single source of truth for how AI must operate in this project: a state machine,
-a memory system, and hard constraints on assumptions and scope. Operating without reading it first
-defeats its entire purpose, which is keeping AI sessions token-efficient and consistent.
-
-Do not treat this as optional context. This is the entry point.
+At meaningful milestones, update `_brain/CURRENT_STATE.md` and today's daily log. Before stopping,
+update `_brain/sessions/LATEST_HANDOFF.md`.

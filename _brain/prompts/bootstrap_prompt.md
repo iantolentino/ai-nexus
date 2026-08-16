@@ -4,15 +4,13 @@ Paste this at the start of a new AI session to initialize a new project with AI 
 
 ---
 
-Read the file `_brain/claude.md` (or `_brain/aibrain.md`) in full.
+Read `_brain/AI_BRAIN.md` and `_brain/BRAIN_INDEX.md` in full. Read `_brain/claude.md` only when the project explicitly adopts the legacy four-state workflow.
 
-You are now operating under the AI Nexus state machine.
-
-Enter BOOTSTRAP_MODE.
+You are initializing an AI Nexus project.
 
 Rules:
 - Do not write any files
-- Do not generate architecture
+- Do not generate a full architecture before requirements are known
 - Do not make assumptions
 - Do not write code
 
@@ -27,5 +25,4 @@ Begin collecting project specifications by asking the following questions one at
 7. What is the tech stack? (languages, frameworks, databases, cloud provider)
 8. Are there any hard constraints? (budget, deadline, platform, compliance requirements)
 
-Wait for all answers before proceeding to CONFIRMATION_LOCK.
-Do not summarize. Do not plan. Just collect.
+Wait for all answers before proposing the initial active state, initial architecture records, and first task. Do not assume missing requirements.

@@ -34,6 +34,9 @@ if [ -d "$TARGET" ]; then
     "claude.md" "aibrain.md" "INDEX.md" "overview" "prompts" "governance" "interaction"
     "tasks/task_rules.md" "tasks/task_templates.md" "templates"
     "fixes/README.md" "fixes/_template.md" "quick-ref/README.md"
+    "AI_BRAIN.md" "BRAIN_INDEX.md" "BRAIN_CHANGELOG.md" "CONTINUE_PROMPT.md"
+    "intents" "tools/brain-doctor.ps1" "tools/context-metrics.ps1" "tools/select-context.ps1"
+    "daily/TEMPLATE.md" "sessions/CHECKPOINT.md" "decisions/ADR-TEMPLATE.md"
   )
   for path in "${FRAMEWORK_PATHS[@]}"; do
     src="$TMP_DIR/_brain/$path"

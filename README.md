@@ -21,7 +21,7 @@ AI Nexus fixes this with a strict **4-state execution model** and a memory syste
 
 ## How It Works
 
-All AI behavior is governed by `_brain/claude.md` (the brain controller).
+AI Nexus v2 uses `_brain/AI_BRAIN.md` and `_brain/BRAIN_INDEX.md` to select the minimum required context. The root provider instruction file tells the AI to run `_brain/tools/select-context.ps1`, then read only the selected files. The legacy `_brain/claude.md` controller remains available for projects that explicitly use its four-state workflow.
 
 **When the AI reads claude.md, it:**
 - Loads 4 mandatory skills (Ponytail, Andrej Karpathy, Claude-mem, Tasteskill)

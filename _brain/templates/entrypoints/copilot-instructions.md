@@ -1,12 +1,6 @@
-# READ THIS FIRST
+# AI Nexus context policy
 
-Before doing anything else in this repository — before scanning files, before answering questions,
-before writing code — read `_brain/claude.md` (or `_brain/aibrain.md`) in full.
-
-That file is the single source of truth for how AI must operate in this project: a state machine,
-a memory system, and hard constraints on assumptions and scope. Operating without reading it first
-defeats its entire purpose, which is keeping AI sessions token-efficient and consistent.
-
-Do not treat this as optional context. This is the entry point.
+Determine the task intent. Use `_brain/tools/select-context.ps1` when available, then read only
+its selected files. Do not scan the repository or read full project history by default.
 
 > Installer note: this file belongs at `.github/copilot-instructions.md` in the target project.

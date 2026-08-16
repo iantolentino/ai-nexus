@@ -37,7 +37,10 @@ try {
         $FrameworkPaths = @(
             "claude.md", "aibrain.md", "INDEX.md", "overview", "prompts", "governance", "interaction",
             "tasks/task_rules.md", "tasks/task_templates.md", "templates",
-            "fixes/README.md", "fixes/_template.md", "quick-ref/README.md"
+            "fixes/README.md", "fixes/_template.md", "quick-ref/README.md",
+            "AI_BRAIN.md", "BRAIN_INDEX.md", "BRAIN_CHANGELOG.md", "CONTINUE_PROMPT.md",
+            "intents", "tools/brain-doctor.ps1", "tools/context-metrics.ps1", "tools/select-context.ps1",
+            "daily/TEMPLATE.md", "sessions/CHECKPOINT.md", "decisions/ADR-TEMPLATE.md"
         )
         foreach ($path in $FrameworkPaths) {
             $src = Join-Path $TmpDir "_brain/$path"
@@ -74,7 +77,7 @@ try {
         $srcName = $EntrySrcNames[$i]
         $destPath = $EntryDestPaths[$i]
         if (Test-Path $destPath) {
-            Write-Host "  skipped $destPath (already exists) - add this line manually: `"Read _brain/claude.md in full before doing anything else.`""
+            Write-Host "  skipped $destPath (already exists) - add the AI Nexus minimal-context policy manually."
         } else {
             $destDir = Split-Path $destPath -Parent
             if ($destDir -and -not (Test-Path $destDir)) {
