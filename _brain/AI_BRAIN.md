@@ -21,6 +21,8 @@ Start every session with `BRAIN_INDEX.md`, `CURRENT_STATE.md`, and `sessions/LAT
 
 Determine the intent, use its profile in `intents/`, and load only the named supporting sources. Expand one level at a time and state the exact missing knowledge before doing so.
 
+When a task names a module, load only its profile in `modules/` plus direct dependencies. For a large source file, use `tools/slice-file.ps1` with a bounded line range instead of reading the whole file. `tools/dependency-boundary.ps1` lists direct local dependency candidates without loading them. Use `tools/error-fingerprint.ps1` for a recurring error before searching broad history.
+
 Use `tools/select-context.ps1` to generate an auditable context plan and session manifest when PowerShell is available. Its 30,000-character default budget is a guard, not a hard limit: if it reports OVER BUDGET, narrow the task files or load them incrementally before reading the whole packet.
 
 ## Session continuity

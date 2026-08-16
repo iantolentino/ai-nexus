@@ -1,5 +1,5 @@
 $brainRoot = Split-Path -Parent $PSScriptRoot
-$activePaths = @('AI_BRAIN.md', 'BRAIN_INDEX.md', 'CURRENT_STATE.md', 'CONTINUE_PROMPT.md', 'CONTEXT_DIFF.md', 'daily', 'sessions', 'architecture', 'decisions', 'intents')
+$activePaths = @('AI_BRAIN.md', 'BRAIN_INDEX.md', 'CURRENT_STATE.md', 'CONTINUE_PROMPT.md', 'CONTEXT_DIFF.md', 'daily', 'sessions', 'architecture', 'decisions', 'intents', 'modules', 'fixes')
 $activeFiles = foreach ($path in $activePaths) {
     $target = Join-Path $brainRoot $path
     if (Test-Path $target -PathType Leaf) { Get-Item $target }

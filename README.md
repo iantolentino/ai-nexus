@@ -84,6 +84,21 @@ pwsh -NoProfile -File _brain/tools/select-context.ps1 -Intent bug-fix -Files src
 
 It reports the selected files, line and character totals, deliberately skipped knowledge, and can save a session manifest. Its default 30,000-character budget warns when a packet is becoming too large; it does not block required work. When it reports `OVER BUDGET`, narrow the source files or load them incrementally. Use `-MaxCharacters` to set a project-specific guard and `-NoManifest` for a read-only preview.
 
+The report includes a **Why loaded** section. With `-Task`, it also ranks only changed files whose paths match task terms; these are candidates, never files the agent must load automatically. Use `-Module auth` (for example) after creating `_brain/modules/auth.md` from the module template.
+
+For large source files, read a bounded slice instead of the entire file:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/slice-file.ps1 -Path src/auth/login.ts -StartLine 80 -EndLine 170
+```
+
+For direct local dependency candidates and recurring error fingerprints:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/dependency-boundary.ps1 -Path src/auth/login.ts
+pwsh -NoProfile -File _brain/tools/error-fingerprint.ps1 -ErrorFile logs/login-error.txt
+```
+
 ## Token-efficiency effect
 
 AI Nexus saves context by controlling **what enters a session**, rather than claiming a provider-specific token quota.
@@ -119,6 +134,14 @@ Run the metrics command to inspect the current brain size:
 ```powershell
 pwsh -NoProfile -File _brain/tools/context-metrics.ps1
 ```
+
+Record a selected packet in monthly session-cost history when desired:
+
+```powershell
+pwsh -NoProfile -File _brain/tools/record-session-cost.ps1
+```
+
+This records deterministic files, lines, characters, and a clearly labeled rough character-to-token estimate. It does not claim provider billing data.
 
 ## Git-aware continuation
 
@@ -189,6 +212,7 @@ pwsh -NoProfile -File _brain/tools/context-metrics.ps1
 ```
 
 Brain Doctor checks active knowledge quality. Context Metrics reports deterministic file, line, and character totals without relying on provider-specific token accounting.
+When context manifests exist, Brain Doctor also suggests rarely selected knowledge for human review. It never archives or deletes those files automatically.
 
 ## License
 

@@ -39,6 +39,20 @@ if (Test-Path $index) {
     }
 }
 
+$manifests = Get-ChildItem (Join-Path $brainRoot 'sessions/manifests') -Filter 'context-*.md' -File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 20
+if ($manifests.Count -gt 0) {
+    $loadedText = ($manifests | ForEach-Object { Get-Content $_.FullName -Raw }) -join "`n"
+    $candidates = @('architecture', 'decisions', 'modules', 'fixes') | ForEach-Object {
+        $folder = Join-Path $brainRoot $_
+        if (Test-Path $folder) { Get-ChildItem $folder -File -Recurse | Where-Object { $_.Name -notmatch 'TEMPLATE|ERROR_FINGERPRINTS' } }
+    }
+    $unused = @($candidates | Where-Object { $loadedText -notmatch [regex]::Escape($_.Name) })
+    if ($unused.Count -gt 0) {
+        $preview = ($unused | Select-Object -First 5 | ForEach-Object { $_.FullName.Substring($brainRoot.Length + 1) }) -join ', '
+        $warnings.Add("Cleanup suggestion: $($unused.Count) knowledge file(s) were not selected by the latest manifests. Review before archiving: $preview")
+    }
+}
+
 $score = [Math]::Max(0, 100 - ($warnings.Count * 8))
 Write-Output "Brain Health: $score%"
 if ($warnings.Count -eq 0) { Write-Output 'No warnings.' } else { $warnings | ForEach-Object { Write-Output "Warning: $_" } }

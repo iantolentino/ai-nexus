@@ -10,11 +10,17 @@ Use this index as Question -> Knowledge Needed -> File. Do not search the whole 
 | Why was a technical choice made? | Decision record | `decisions/ADR-*.md` |
 | How is the system designed? | Architecture | `architecture/ARCHITECTURE.md` |
 | Which context fits this task? | Intent profile | `intents/<intent>.md` |
+| Which module owns this task? | Module scope and direct dependencies | `modules/<module>.md` |
 | How should I review this change? | Code-review context | `intents/code-review.md` |
 | How should I maintain AI Nexus itself? | Framework-maintenance context | `intents/framework-maintenance.md` |
 | What is the recommended minimum context? | Context selector | `tools/select-context.ps1` |
 | Is the selected context too large? | Context budget guard | `tools/select-context.ps1 -MaxCharacters ...` |
 | What did this session load and skip? | Context manifest | `sessions/manifests/context-*.md` |
+| Why did a file enter context? | Selector reason report | `tools/select-context.ps1` |
+| How can I read only part of a large file? | Bounded source slice | `tools/slice-file.ps1` |
+| What directly depends on this source file? | Dependency boundary | `tools/dependency-boundary.ps1` |
+| Is this error already known? | Stable error fingerprint | `tools/error-fingerprint.ps1` and `fixes/ERROR_FINGERPRINTS.md` |
+| How much context did sessions use over time? | Session cost history | `tools/record-session-cost.ps1` |
 | What changed since the last handoff? | Git context diff | `tools/context-diff.ps1` and `CONTEXT_DIFF.md` |
 | What Git state belongs in a handoff? | Handoff baseline | `tools/handoff-baseline.ps1` |
 | How can I shorten a long handoff safely? | Reviewable compact-handoff draft | `tools/handoff-compact.ps1` |
