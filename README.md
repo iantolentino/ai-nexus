@@ -26,6 +26,10 @@ curl -fsSL https://raw.githubusercontent.com/iantolentino/ai-nexus/main/install.
 
 The installer creates `_brain/`. On updates it preserves project knowledge and refreshes framework files. It also creates provider entry instructions only when a matching file does not already exist.
 
+## Developing AI Nexus itself
+
+This repository uses the same minimal-context workflow. Codex reads the root `AGENTS.md`; Claude Code reads the root `CLAUDE.md`. Both use the `framework-maintenance` intent, which loads `FRAMEWORK_STATE.md` instead of template project state.
+
 ## Automatic start
 
 Open a supported coding agent from the project root and state the task normally:

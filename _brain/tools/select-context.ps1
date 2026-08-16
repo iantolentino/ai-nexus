@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('feature-development', 'bug-fix', 'refactor', 'investigation', 'code-review')]
+    [ValidateSet('feature-development', 'bug-fix', 'refactor', 'investigation', 'code-review', 'framework-maintenance')]
     [string]$Intent,
     [string[]]$Files = @(),
     [string]$ErrorContext,
@@ -21,7 +21,12 @@ function Add-ContextFile([string]$path) {
     if (-not ($selected.FullName -contains $item.FullName)) { $selected.Add($item) }
 }
 
-@('AI_BRAIN.md', 'BRAIN_INDEX.md', 'CURRENT_STATE.md', 'sessions/LATEST_HANDOFF.md', "intents/$Intent.md") | ForEach-Object { Add-ContextFile $_ }
+$baseline = if ($Intent -eq 'framework-maintenance') {
+    @('AI_BRAIN.md', 'BRAIN_INDEX.md', "intents/$Intent.md", 'FRAMEWORK_STATE.md')
+} else {
+    @('AI_BRAIN.md', 'BRAIN_INDEX.md', 'CURRENT_STATE.md', 'sessions/LATEST_HANDOFF.md', "intents/$Intent.md")
+}
+$baseline | ForEach-Object { Add-ContextFile $_ }
 $today = Join-Path $brainRoot ('daily/' + (Get-Date -Format 'yyyy-MM-dd') + '.md')
 if (Test-Path $today -PathType Leaf) { Add-ContextFile $today }
 if ($ErrorContext) { Add-ContextFile $ErrorContext }
