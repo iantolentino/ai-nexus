@@ -1,6 +1,6 @@
 # AI Nexus context policy
 
-Before work, determine the task intent and run `_brain/tools/select-context.ps1` for that intent.
+`_brain/AI_BRAIN.md` is the single AI Nexus controller. Before work, read it, determine the task intent, and run `_brain/tools/select-context.ps1` for that intent.
 Read only the files in its Context Selection. Do not scan the repository, read the full brain, or
 load legacy progress/history unless the selected context identifies an exact missing fact.
 
